@@ -35,7 +35,3 @@ class Items
         $this->Nom = $photo; 
     }
 }
-
-
-
-?>
