@@ -1,0 +1,143 @@
+use dbchevalersk6;
+drop procedure if exists ajouterArme;
+drop procedure if exists ajouterPotion;
+drop procedure if exists ajouterElement;
+drop procedure if exists ajouterArmure;
+drop procedure if exists trouverJoueur;
+drop procedure if exists ajouterJoueurs;
+drop trigger if exists CTRLInsertItems;
+
+
+delimiter |
+create procedure ajouterArme(
+in pNom varchar(50),
+in pQuantite int,
+in pPrix int,
+in pPhoto varchar(100),
+in pDescription varchar(500),
+in pEfficacite varchar(30),
+in pGenreArme varchar(45))
+begin
+declare pTypeItem char(1) default 'A';
+declare pidItem int;
+start transaction;
+insert into Items (nom, quantiteStock, prix, photo,typeItem)
+values ( pNom, pQuantite, pPrix, pPhoto, ptypeItem);
+select LAST_INSERT_ID() into pidItem;
+insert into Armes (idItem, description,efficacite, genre)
+values (pidItem, pdescription,pEfficacite, pGenreArme);
+commit;
+end |
+
+delimiter |
+create procedure ajouterPotion(
+in pNom varchar(45),
+in pQuantite int,
+in pPrix int,
+in pPhoto varchar(100),
+in pEffet varchar(45),
+in pDuree int,
+in ptypePotion char(1))
+begin
+declare pTypeItem char(1) default 'P';
+declare pidItem int;
+start transaction;
+insert into Items (nom, quantiteStock, prix, photo, typeItem)
+values ( pNom, pQuantite, pPrix, pPhoto, ptypeItem);
+select LAST_INSERT_ID() into pidItem;
+insert into Potions (idItem, effet,duree, TypePotion)
+values (pidItem, pEffet, pDuree, ptypePotion);
+commit;
+end |
+
+delimiter |
+create procedure ajouterElement(
+in pNom varchar(45),
+in pQuantite int,
+in pPrix int,
+in pPhoto varchar(100),
+in prarete tinyint,
+in pdangerosite tinyint )
+begin
+declare pTypeItem char(1) default 'E';
+declare pidItem int;
+start transaction;
+insert into Items (nom, quantiteStock, prix, photo,typeItem)
+values ( pNom, pQuantite, pPrix, pPhoto, ptypeItem);
+select LAST_INSERT_ID() into pidItem;
+insert into Elements (idItem, rarete, dangerosite)
+values (pidItem, prarete, pdangerosite);
+commit;
+end |
+delimiter |
+create procedure ajouterArmure(
+in pNom varchar(50),
+in pQuantite int,
+in pPrix int,
+in pPhoto varchar(100),
+in ptaille int,
+in pmatiere varchar(45))
+begin
+declare pTypeItem char(1) default 'R';
+declare pidItem int;
+start transaction;
+insert into Items (nom, quantiteStock, prix, photo,typeItem)
+values ( pNom, pQuantite, pPrix, pPhoto, ptypeItem);
+select LAST_INSERT_ID() into pidItem;
+insert into Armures (idItem, taille,matiere)
+values (pidItem,ptaille,pmatiere);
+commit;
+end |
+
+DELIMITER |
+CREATE TRIGGER CTRLInsertItems
+before insert ON Items
+for each row
+begin
+declare
+maxPrix int;
+declare minPrix int;
+-- on garantit que le prix de la potion doit être plus grand que celui de --l'élément
+if(new.TypeItem='P') Then
+select max(prix) into maxPrix from Items where typeItem ='E' ;
+if(new.prix <=maxPrix) then
+SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Le prix est plus bas que éléments';
+end if;
+end if;
+-- on garantit que le prix de l'élément doit être plus petit que celui de la potion
+if(new.typeItem='E') Then
+select min(prix) into minPrix from Items where typeItem ='P' ;
+if(new.Prix >=minPrix) then
+SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Le prix dépasse celui des potions';
+end if;
+end if;
+END |;
+
+DELIMITER |
+
+CREATE PROCEDURE trouverJoueur(
+    IN pcourriel VARCHAR(45)
+)
+BEGIN
+    SELECT * FROM joueurs WHERE courriel = pcourriel;
+END |
+
+DELIMITER ;
+
+
+delimiter |
+create procedure ajouterJoueurs(
+in pAlias varchar(8),
+in pnom varchar(25),
+in pPrenom varchar(25),
+in pNiveau varchar(15),
+in pEstAdmin tinyint,
+in pmotDePasse varchar(20),
+in pCourriel varchar(45)
+)
+begin
+start transaction ;
+insert into joueurs (alias,nom,prenom,niveau,estAdmin,motdepasse,courriel)
+values (pAlias,pnom,pPrenom,pNiveau,pEstAdmin,pmotDePasse,pCourriel);
+commit;
+end |
