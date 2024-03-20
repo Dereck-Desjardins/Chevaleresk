@@ -1,6 +1,17 @@
 <?php
-    $content = <<<HTML
-        <div class="content">
+$content = <<<HTML
+    <div class="content">
+
+        <div class="slider">
+            <div class="slide">
+                <img src="Image/darkvader.png" alt="Slide 1">
+            </div>
+            <div class="slide">
+                <img src="Image/wood.jpg" alt="Slide 2">
+            </div>
+            <!-- Ajoutez plus de diapositives si nécessaire -->
+        </div>
+        <div>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aliquam delectus minus non nesciunt esse dolorem impedit adipisci? Culpa ratione maiores officiis quisquam sapiente corporis, harum sint unde laudantium dolores! Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, impedit? Consequatur maiores autem doloremque, odit dolor quos et placeat alias qui in repellat temporibus sequi totam id dignissimos doloribus dolore.
             Impedit culpa id natus dicta explicabo perspiciatis vero veniam laborum suscipit dolores quos minima a quis eum, provident maxime possimus odit commodi expedita voluptatibus dolorum similique optio. Molestiae, quos odit.
             Quam harum modi obcaecati minus fugit, recusandae commodi itaque illum quis exercitationem asperiores nam fuga voluptatem quisquam incidunt maiores hic. Cum officiis ipsa nobis culpa rerum dolores necessitatibus! Quos, quia.
@@ -12,6 +23,46 @@
             Maiores, commodi? Facere assumenda nesciunt harum quidem tempora ab. Beatae corporis deserunt aut eveniet tenetur cupiditate, facere libero totam dolor accusamus vero voluptatum modi dolore accusantium, voluptate alias error. Vel.
             Provident officia est, inventore, cum beatae illo ipsam maxime quaerat at praesentium fuga! Expedita corrupti esse minima minus laborum delectus, repudiandae, modi eaque rem eveniet veniam quo deleniti dicta voluptatibus?
         </div>
-    HTML;
-    include "views/master.php";
+    </div>
+
+    <style>
+        img{
+            padding-bottom: 2%;
+            padding-top: none;
+            margin: auto;
+            display: block;
+            height: 600px;
+            width: 70%;          
+        }
+        .slider{
+            padding-bottom: none;
+        }
+        .content{
+            padding-bottom: 2%;
+            padding-top: none;
+            margin: auto;
+            display: block;
+            height: 600px;
+        }
+    </style>
+
+    <!-- Script JavaScript pour le slider -->
+    <script>
+        var slideIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var slides = document.getElementsByClassName("slide");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(carousel, 5000); // Change image every 2 seconds
+        }
+    </script>
+HTML;
+include "views/master.php";
 ?>

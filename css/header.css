@@ -1,15 +1,8 @@
-/* .button {
-    margin: 0;
-    height: auto;
-    background: transparent;
-    padding: 0;
-    border: none;
-    cursor: pointer;
-  }
   body{
-      background-color: black;
+      background-color: #2b2d31;
+      color: white;
   }
-   button styling
+  /* button styling */
   .button {
     --border-right: 6px;
     --text-stroke-color: rgba(255,255,255,0.6);
@@ -21,7 +14,8 @@
     font-family: "Arial";
     position: relative;
     text-transform: uppercase;
-    color: transparent;
+    background: transparent;
+    border: none;
     -webkit-text-stroke: 1px var(--text-stroke-color);
   }
   .hover-text {
@@ -31,7 +25,6 @@
     color: var(--animation-color);
     width: 0%;
     inset: 0;
-    border-right: var(--border-right) solid var(--animation-color);
     overflow: hidden;
     transition: 0.5s;
     -webkit-text-stroke: 1px var(--animation-color);
@@ -54,7 +47,6 @@
     color: var(--animation-color);
     width: 0%;
     inset: 0;
-    border-right: var(--border-right) solid var(--animation-color);
     overflow: hidden;
     transition: 0.5s;
     -webkit-text-stroke: 1px var(--animation-color);
@@ -71,16 +63,16 @@
   display: inline;
 }
 .menuNavigation{
-  width: 100%;
-  position: fixed;
-  padding: 0px 10px 10px 0px;
-  margin-bottom: 10px;
-  height: auto;
-  border-style: solid;
-  border-width: 0px;
-  border-bottom-width: 5px;
-  text-align: center;
-  background-color: lightgrey;
+    width: 100%;
+    position: fixed;
+    padding: 0px 10px 10px 0px;
+    margin-bottom: 10px;
+    height: auto;
+    border-style: solid;
+    border-width: 0px;
+    border-bottom-width: 5px;
+    text-align: center;
+    background-color: #2b2d31;
 }
 .itemNavigation{  
   font-size: 2.5em;
@@ -98,4 +90,4 @@
 .content{
   padding-top: 120px;
   font-size: 2em;
-} */
+}
