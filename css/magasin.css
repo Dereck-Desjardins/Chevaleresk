@@ -1,0 +1,48 @@
+.itemLayout{
+    display: flex;
+    height: auto;
+    border-color:black;
+    border-style: solid;
+    padding: 5px 10px 5px 10px;
+}
+.shopItemLeft{
+    flex: 1;
+}
+.shopItemMiddle{
+    flex: 3;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.shopItemRight{
+    flex: 1;
+    align-content:center;
+    text-align: center;
+}
+.photoItemShop{
+    height: 100px;
+    width: 100px;
+}
+.nomItem{
+    font-size: 2em;
+}
+.typeItem{
+    align-content: bottom;
+    font-size: 1.5em;
+}
+.prix{
+    font-size: 1.5em;
+    
+}
+.quantite{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+    width: 90px;
+    padding-left: 10px;
+}
+.bouton{
+    background-color: rgb(160, 9, 9);
+    color: white;
+    border: none;
+    padding: 5px;
+}
