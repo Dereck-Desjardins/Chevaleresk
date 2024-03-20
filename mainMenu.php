@@ -1,17 +1,22 @@
 <?php
-    $content = <<<HTML
+include_once 'MySql/db_connection.php';
+
+//Création de la class BD
+$db = new DB();
+$result = $db->Select('photo,nom', 'items', 'idItem = 4');
+// Valeur de $result = array(1) { [0]=> array(1) { ["photo"]=> string(11) "THEKING.jpg" } }
+//Si tu veut connaitre la valeur du tableau retourné juste faire var_dump($result);
+
+
+$photo = "data/img/" . $result[0]['photo'];
+$nom = $result[0]['nom'];
+// Construction du contenu HTML avec le chemin de l'image
+$content = <<<HTML
         <div class="content">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aliquam delectus minus non nesciunt esse dolorem impedit adipisci? Culpa ratione maiores officiis quisquam sapiente corporis, harum sint unde laudantium dolores! Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, impedit? Consequatur maiores autem doloremque, odit dolor quos et placeat alias qui in repellat temporibus sequi totam id dignissimos doloribus dolore.
-            Impedit culpa id natus dicta explicabo perspiciatis vero veniam laborum suscipit dolores quos minima a quis eum, provident maxime possimus odit commodi expedita voluptatibus dolorum similique optio. Molestiae, quos odit.
-            Quam harum modi obcaecati minus fugit, recusandae commodi itaque illum quis exercitationem asperiores nam fuga voluptatem quisquam incidunt maiores hic. Cum officiis ipsa nobis culpa rerum dolores necessitatibus! Quos, quia.
-            Accusamus quas temporibus asperiores, modi doloremque fugiat saepe, iste reiciendis fugit alias pariatur incidunt excepturi aspernatur eius, libero quibusdam inventore consectetur et nemo facere a quidem! Tenetur praesentium laborum quibusdam!
-            Asperiores aperiam fugiat, laudantium, quisquam quo minus provident corrupti repudiandae earum velit doloribus repellat eligendi modi fugit deleniti placeat doloremque. Illum asperiores soluta, nesciunt est tenetur repudiandae pariatur totam quam.
-            Quae minus, cupiditate quam consequatur doloremque modi, qui odio dolorem corrupti, temporibus voluptatem cum aliquam ducimus aperiam odit earum? Alias hic blanditiis nisi ad optio. Sequi voluptatem quisquam laudantium dolores.
-            A sit repellat odio reiciendis porro, itaque earum asperiores fugit corrupti magnam dolore fuga deserunt mollitia distinctio, aliquid rem quasi tenetur ducimus repellendus aut. Repellendus tempora neque perferendis quaerat laudantium!
-            Commodi facere iste molestiae dolores consequatur voluptatem consequuntur esse. Ducimus et voluptatibus, eum saepe iusto incidunt similique consequatur iste voluptate praesentium corporis distinctio, earum minus blanditiis nostrum tenetur ut dolore.
-            Maiores, commodi? Facere assumenda nesciunt harum quidem tempora ab. Beatae corporis deserunt aut eveniet tenetur cupiditate, facere libero totam dolor accusamus vero voluptatum modi dolore accusantium, voluptate alias error. Vel.
-            Provident officia est, inventore, cum beatae illo ipsam maxime quaerat at praesentium fuga! Expedita corrupti esse minima minus laborum delectus, repudiandae, modi eaque rem eveniet veniam quo deleniti dicta voluptatibus?
+        <a href="$photo"><img  src=$photo ></a> 
         </div>
-    HTML;
-    include "views/master.php";
+        $nom
+HTML;
+
+include "views/master.php";
 ?>
