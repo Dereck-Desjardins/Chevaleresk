@@ -33,13 +33,12 @@
 
 .button-SignUn {
     width: 125px;
+    background: transparent;
     color: white;
-    background-color: #2CB3F0;
     border: none;
     border-radius: 5px;
     transition: all ease 0.1s;
-    box-shadow: 0px 5px 0px 0px #2CB3F0;
-    position: relative;
+    position:relative;
 }
 input {
     width: 300px;
@@ -47,7 +46,7 @@ input {
 
 .inputbox {
 position: relative;
-width: 196px;
+width: 300px;
 }
 
 .inputbox input {

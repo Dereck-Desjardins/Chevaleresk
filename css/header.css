@@ -1,93 +1,93 @@
-  body{
-      background-color: #2b2d31;
-      color: white;
-  }
-  /* button styling */
-  .button {
-    --border-right: 6px;
-    --text-stroke-color: rgba(255,255,255,0.6);
-    --animation-color: #37FF8B;
-    --fs-size: 2em;
-    letter-spacing: 3px;
-    text-decoration: none;
-    font-size: var(--fs-size);
-    font-family: "Arial";
-    position: relative;
-    text-transform: uppercase;
-    background: transparent;
-    border: none;
-    -webkit-text-stroke: 1px var(--text-stroke-color);
-  }
-  .hover-text {
-    position: absolute;
-    box-sizing: border-box;
-    content: attr(data-text);
-    color: var(--animation-color);
-    width: 0%;
-    inset: 0;
-    overflow: hidden;
-    transition: 0.5s;
-    -webkit-text-stroke: 1px var(--animation-color);
-  }
-  .button:hover .hover-text {
-    width: 100%;
-    filter: drop-shadow(0 0 23px var(--animation-color))
-  }
-  .hover-text {
-  display: none;
+body{
+  background-color: #2b2d31;
+  color: white;
 }
-
-.button:hover .hover-text {
-  display: inline;
+/* button styling */
+.button {
+--border-right: 6px;
+--text-stroke-color: rgba(255,255,255,0.6);
+--animation-color: #37FF8B;
+--fs-size: 2em;
+letter-spacing: 3px;
+text-decoration: none;
+font-size: var(--fs-size);
+font-family: "Arial";
+position: relative;
+text-transform: uppercase;
+background: transparent;
+border: none;
+-webkit-text-stroke: 1px var(--text-stroke-color);
 }
 .hover-text {
-    position: absolute;
-    box-sizing: border-box;
-    content: attr(data-text);
-    color: var(--animation-color);
-    width: 0%;
-    inset: 0;
-    overflow: hidden;
-    transition: 0.5s;
-    -webkit-text-stroke: 1px var(--animation-color);
-  }
-  .button:hover .hover-text {
-    width: 100%;
-    filter: drop-shadow(0 0 23px var(--animation-color))
-  }
-  .hover-text {
-  display: none;
+position: absolute;
+box-sizing: border-box;
+content: attr(data-text);
+color: var(--animation-color);
+width: 0%;
+inset: 0;
+overflow: hidden;
+transition: 0.5s;
+-webkit-text-stroke: 1px var(--animation-color);
+}
+.button:hover .hover-text {
+width: 100%;
+filter: drop-shadow(0 0 23px var(--animation-color))
+}
+.hover-text {
+display: none;
 }
 
 .button:hover .hover-text {
-  display: inline;
+display: inline;
+}
+.hover-text {
+position: absolute;
+box-sizing: border-box;
+content: attr(data-text);
+color: var(--animation-color);
+width: 0%;
+inset: 0;
+overflow: hidden;
+transition: 0.5s;
+-webkit-text-stroke: 1px var(--animation-color);
+}
+.button:hover .hover-text {
+width: 100%;
+filter: drop-shadow(0 0 23px var(--animation-color))
+}
+.hover-text {
+display: none;
+}
+
+.button:hover .hover-text {
+display: inline;
 }
 .menuNavigation{
-    width: 100%;
-    position: fixed;
-    padding: 0px 10px 10px 0px;
-    margin-bottom: 10px;
-    height: auto;
-    border-style: solid;
-    border-width: 0px;
-    border-bottom-width: 5px;
-    text-align: center;
-    background-color: #2b2d31;
+width: 100%;
+position: fixed;
+padding: 0px 10px 10px 0px;
+margin-bottom: 10px;
+height: auto;
+border-style: solid;
+border-width: 0px;
+border-bottom-width: 5px;
+text-align: center;
+background-color: #2b2d31;
 }
 .itemNavigation{  
-  font-size: 2.5em;
-  text-decoration: none;
-  color: inherit;
-  padding:0px 30px 0px 30px;
+font-size: 2.5em;
+text-decoration: none;
+color: inherit;
+padding:0px 30px 0px 30px;
 
 }
 .titleNavigation{  
-  font-size: 4em;
-  text-decoration: none;
-  color: inherit;
-  padding:0px 30px 0px 30px;
+font-size: 4em;
+text-decoration: none;
+color: inherit;
+padding:0px 30px 0px 30px;
 }
 .content{
-  padding-top: 120px;
-  font-size: 2em;
+padding-top: 120px;
+font-size: 2em;
 }

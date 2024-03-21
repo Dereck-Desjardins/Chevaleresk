@@ -7,13 +7,14 @@
             </div>
             <div id="content" class="content">
             <div class="select-container">
-                <select name="dropdown">
-                <option value="option0">Filtre</option>
-                <option value="option1">Quantité</option>
-                <option value="option2">Type</option>
-                <option value="option3">Prix plus petit au plus grand</option>
-                <option value="option4">Prix plus grand au plus petit</option>
+                <select name="dropdown" id="dropdown">
+                    <option value="" disabled selected hidden>Filtre</option>
+                    <option value="option1">Quantité</option>
+                    <option value="option2">Type</option>
+                    <option value="option3">Prix plus petit au plus grand</option>
+                    <option value="option4">Prix plus grand au plus petit</option>
                 </select>
+
             </div>
             <div class="input-container">
                 <input placeholder="Search.." id="input" class="input" name="text" type="text">
@@ -34,12 +35,12 @@
 ?>
 
 <style>
-    .title {
-  margin: 0;
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.title {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .content {
@@ -51,13 +52,15 @@
 
 .content2 {
   display: flex;
-  justify-content: space-between; /* Centrer les boutons horizontalement */
+  justify-content: space-between;
   align-items: center;
-  padding: 10px 472px; /* Réduire le padding */
+  padding: 10px 472px;
 }
 
 .select-container {
   margin-right: 20px;
+  height: ;
+  width: 300px;
 }
 
 .input-container {

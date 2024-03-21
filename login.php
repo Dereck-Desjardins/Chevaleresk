@@ -22,7 +22,7 @@ $content = <<<HTML
             </div>
             </div>
                 <div class="div-button">
-                    <a href="your_destination_url_here">
+                    <a href="signin.php">
                         <button class="formControl button-SignUn" type="button" value="Sign Un">Sign Up</button>                
                     </a> 
                 </div>
