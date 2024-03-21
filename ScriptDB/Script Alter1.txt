@@ -1,0 +1,12 @@
+Use dbchevalersk6 ;
+
+/*Alter table*/
+ALTER TABLE Joueurs ADD CONSTRAINT CHK_estAdmin CHECK (estAdmin = 0  OR estAdmin = 1);
+ALTER TABLE Joueurs ADD CONSTRAINT CK_niveau CHECK (niveau in ('herboriste', 'debutant', 'intermediaire', 'expert'));
+ALTER TABLE Joueurs ALTER solde SET DEFAULT 1000 ;
+alter TABLE Items ADD CONSTRAINT CHK_items CHECK (typeItem in ('R','A','P','E'));
+ALTER TABLE Enigmes ADD CONSTRAINT ck_type CHECK (TypeEnigme in ('P', 'E', 'Z') AND estPigee in ('o', 'n'));
+alter TABLE Enigmes ADD CONSTRAINT CHK_difficulte CHECK (Difficulte in ('d','m','f'));
+alter TABLE Potions ADD CONSTRAINT CHK_typePotions CHECK (TypePotion in ('A','D'));
+alter TABLE Statistiques ADD CONSTRAINT CHK_stat CHECK (estReussie in (1,0));
+ALTER TABLE Items MODIFY COLUMN flagDispo CHAR(1) NOT NULL DEFAULT '1', ADD CONSTRAINT CHK_dispo CHECK (flagDispo IN ('0', '1'));
