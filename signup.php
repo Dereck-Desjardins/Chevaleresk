@@ -117,7 +117,7 @@
             <h2 class="title">Création de compte</h2>
         </div>
         <div id="content">
-            <form class="form" id="subscribeform" action="$actionUrl" method="POST">
+            <form class="form" id="subscribeform" action="confirmSignup.php" method="POST">
                 <label class="avatar" for="file"><span></span></label>                
                 <div class="inputbox">
                     <input class="formControl" name="FirstName" id="FirstName" required requireMessage="Veuillez entrer votre prenom"  type="text">
@@ -156,9 +156,7 @@
                 </div><br />
                 <div class="div-button">
                     <button type="button" onclick="window.location.href='login.php'" class="button">Cancel</button>
-                    <a href="your_destination_url_here">
-                        <button class="button">Sign Up</button>
-                    </a>
+                    <input type="submit">
                 </div>
             </form>
         </div>

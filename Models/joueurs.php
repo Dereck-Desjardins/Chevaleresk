@@ -13,14 +13,13 @@ class Joueurs
 
     public $Courriel;
 
-    public function __construct($email) {
+    public function __construct($email)
+    {
         try {
-            DB::Connection();
-            
-            $result = DB::TrouverJoueur($email);
-            
-          
-            foreach($result as $row) {
+            $result = DB::TrouverJoueuer($email);
+
+            if ($result) {
+                $row = $result->fetch();
                 $this->Id = $row['id'];
                 $this->Alias = $row['alias'];
                 $this->Prenom = $row['prenom'];
@@ -29,18 +28,15 @@ class Joueurs
                 $this->Niveau = $row['niveau'];
                 $this->EstAdmin = $row['estAdmin'];
                 $this->Solde = $row['solde'];
+            } else {
+                throw new Exception('Player not found');
             }
-            $connection = null;
-          }
-          catch(PDOException $e) {
-          }
-    }
 
-    public static function CreatePlayer($prenom, $nom, $alias, $motdepasse, $courriel){
-        DB::Connection();
-        DB::CreerJoueur();
-    }
-    
+            $connection = null;
+        } catch (PDOException $e) {
+            throw new Exception('Database error: ' . $e->getMessage());
+        }
+    } 
     public function getId(){
         return $this->Id;
     }

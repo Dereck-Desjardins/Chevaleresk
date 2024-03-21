@@ -32,4 +32,3 @@ $content = <<<HTML
     </div>
     HTML;
 include "views/master.php";
-?>

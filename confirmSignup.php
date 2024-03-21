@@ -1,9 +1,10 @@
 <?php   
     include_once "Models/joueurs.php";
     session_start();
-    //retreive info par $_post
-    Joueurs::CreatePlayer($_POST);
+    DB::InsertJoueur($_POST);
 
-    $joueur = new Joueurs();
+    $email = $_POST["Courriel"];
+    $joueur = new Joueurs($email);
     $_SESSION["currentPlayer"] = $joueur;
     header('Location: boutique.php');
+    exit;
