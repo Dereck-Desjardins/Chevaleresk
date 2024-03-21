@@ -1,0 +1,12 @@
+use dbchevalersk6;
+
+CALL ajouterArmure('Armure de l''Éclipse', 1, 10000, 'armure_eclipse.jpg', 50, 'Titanium');
+CALL ajouterArmure('Cuirasse du Dragon', 1, 12000, 'cuirasse_dragon.jpg', 55, 'Écailles');
+CALL ajouterArmure('Robe des Étoiles', 1, 15000, 'robe_etoiles.jpg', 40, 'Soie Galactique');
+call ajouterArme('THE KING TROPHY',1,10000,'THEKING.jpg','Forgée dans les flammes de la colère des dieux, la légendaire épée "THE KING TROPHY" incarne la puissance absolue. Avec une lame aussi tranchante que l''aube et une poignée ornée de gemmes rares, cette arme est le symbole ultime de la domination sur le champ de bataille. Portée par les plus grands héros et redoutée par les plus vils des ennemis, "THE KING TROPHY" est bien plus qu''une simple arme - c''est une légende vivante qui défie le temps lui-même.','Destruction totale ','Une main');
+
+CALL ajouterElement('Feu élémentaire', 5, 50, 'feu.jpg', 80, 5);
+CALL ajouterElement('Eau glaciale', 3, 75, 'glace.jpg', 90, 4);
+CALL ajouterElement('Vent impétueux', 2, 60, 'vent.jpg', 70, 6);
+CALL ajouterElement('Terre solide', 4, 40, 'terre.jpg', 85, 3);
+

@@ -1,0 +1,283 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema dbchevalersk6
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema dbchevalersk6
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `dbchevalersk6` DEFAULT CHARACTER SET utf8 ;
+USE `dbchevalersk6` ;
+
+-- -----------------------------------------------------
+-- Table `dbchevalersk6`.`Items`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `dbchevalersk6`.`Items` ;
+
+CREATE TABLE IF NOT EXISTS `dbchevalersk6`.`Items` (
+  `idItem` INT NOT NULL AUTO_INCREMENT,
+  `nom` VARCHAR(45) NOT NULL,
+  `quantiteStock` INT NOT NULL,
+  `prix` INT NOT NULL,
+  `photo` VARCHAR(45) NOT NULL,
+  `typeItem` CHAR(1) NOT NULL,
+  `flagDispo` CHAR(1) NOT NULL,
+  PRIMARY KEY (`idItem`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbchevalersk6`.`Armes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `dbchevalersk6`.`Armes` ;
+
+CREATE TABLE IF NOT EXISTS `dbchevalersk6`.`Armes` (
+  `idItem` INT NOT NULL,
+  `description` VARCHAR(500) NOT NULL,
+  `efficacite` VARCHAR(30) NOT NULL,
+  `genre` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idItem`),
+  CONSTRAINT `fk_Armes_Items`
+    FOREIGN KEY (`idItem`)
+    REFERENCES `dbchevalersk6`.`Items` (`idItem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbchevalersk6`.`Elements`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `dbchevalersk6`.`Elements` ;
+
+CREATE TABLE IF NOT EXISTS `dbchevalersk6`.`Elements` (
+  `idItem` INT NOT NULL,
+  `Rarete` TINYINT NOT NULL,
+  `dangerosite` TINYINT NOT NULL,
+  PRIMARY KEY (`idItem`),
+  INDEX `fk_Sors_Items1_idx` (`idItem` ASC) ,
+  CONSTRAINT `fk_Sors_Items1`
+    FOREIGN KEY (`idItem`)
+    REFERENCES `dbchevalersk6`.`Items` (`idItem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbchevalersk6`.`Potions`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `dbchevalersk6`.`Potions` ;
+
+CREATE TABLE IF NOT EXISTS `dbchevalersk6`.`Potions` (
+  `idItem` INT NOT NULL,
+  `duree` INT NOT NULL,
+  `effet` VARCHAR(25) NOT NULL,
+  `TypePotion` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`idItem`),
+  INDEX `fk_Potion_Items1_idx` (`idItem` ASC) ,
+  CONSTRAINT `fk_Potion_Items1`
+    FOREIGN KEY (`idItem`)
+    REFERENCES `dbchevalersk6`.`Items` (`idItem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbchevalersk6`.`Armures`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `dbchevalersk6`.`Armures` ;
+
+CREATE TABLE IF NOT EXISTS `dbchevalersk6`.`Armures` (
+  `idItem` INT NOT NULL,
+  `taille` INT NOT NULL,
+  `matiere` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idItem`),
+  INDEX `fk_Armures_Items1_idx` (`idItem` ASC) ,
+  CONSTRAINT `fk_Armures_Items1`
+    FOREIGN KEY (`idItem`)
+    REFERENCES `dbchevalersk6`.`Items` (`idItem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbchevalersk6`.`Joueurs`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `dbchevalersk6`.`Joueurs` ;
+
+CREATE TABLE IF NOT EXISTS `dbchevalersk6`.`Joueurs` (
+  `idJoueur` INT NOT NULL AUTO_INCREMENT,
+  `alias` VARCHAR(8) NOT NULL,
+  `nom` VARCHAR(25) NOT NULL,
+  `prenom` VARCHAR(25) NULL,
+  `solde` INT NOT NULL,
+  `niveau` VARCHAR(15) NOT NULL,
+  `estAdmin` TINYINT NOT NULL,
+  `motdepasse` VARCHAR(20) NOT NULL,
+  `courriel` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idJoueur`),
+  UNIQUE INDEX `alias_UNIQUE` (`alias` ASC) ,
+  UNIQUE INDEX `courriel_UNIQUE` (`courriel` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbchevalersk6`.`Inventaires`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `dbchevalersk6`.`Inventaires` ;
+
+CREATE TABLE IF NOT EXISTS `dbchevalersk6`.`Inventaires` (
+  `dItem` INT NOT NULL,
+  `idJoueur` INT NOT NULL,
+  `quantiteInventaire` INT NOT NULL,
+  PRIMARY KEY (`dItem`, `idJoueur`),
+  INDEX `fk_Inventaire_Joueurs1_idx` (`idJoueur` ASC) ,
+  CONSTRAINT `fk_Inventaire_Items1`
+    FOREIGN KEY (`dItem`)
+    REFERENCES `dbchevalersk6`.`Items` (`idItem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Inventaire_Joueurs1`
+    FOREIGN KEY (`idJoueur`)
+    REFERENCES `dbchevalersk6`.`Joueurs` (`idJoueur`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbchevalersk6`.`Commentaires`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `dbchevalersk6`.`Commentaires` ;
+
+CREATE TABLE IF NOT EXISTS `dbchevalersk6`.`Commentaires` (
+  `dItem` INT NOT NULL,
+  `idJoueur` INT NOT NULL,
+  `lecommentaire` VARCHAR(45) NULL,
+  `nbEtoiles` INT NOT NULL,
+  PRIMARY KEY (`dItem`, `idJoueur`),
+  CONSTRAINT `fk_Commentaires_Inventaires1`
+    FOREIGN KEY (`dItem` , `idJoueur`)
+    REFERENCES `dbchevalersk6`.`Inventaires` (`dItem` , `idJoueur`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbchevalersk6`.`Recettes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `dbchevalersk6`.`Recettes` ;
+
+CREATE TABLE IF NOT EXISTS `dbchevalersk6`.`Recettes` (
+  `Potions_idItem` INT NOT NULL,
+  `Elements_idItem` INT NOT NULL,
+  `Quantite` INT NOT NULL,
+  PRIMARY KEY (`Potions_idItem`, `Elements_idItem`),
+  INDEX `fk_Potions_has_Elements_Elements1_idx` (`Elements_idItem` ASC) ,
+  INDEX `fk_Potions_has_Elements_Potions1_idx` (`Potions_idItem` ASC) ,
+  CONSTRAINT `fk_Potions_has_Elements_Potions1`
+    FOREIGN KEY (`Potions_idItem`)
+    REFERENCES `dbchevalersk6`.`Potions` (`idItem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Potions_has_Elements_Elements1`
+    FOREIGN KEY (`Elements_idItem`)
+    REFERENCES `dbchevalersk6`.`Elements` (`idItem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbchevalersk6`.`Enigmes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `dbchevalersk6`.`Enigmes` ;
+
+CREATE TABLE IF NOT EXISTS `dbchevalersk6`.`Enigmes` (
+  `idEnigme` INT NOT NULL AUTO_INCREMENT,
+  `Enonce` VARCHAR(45) NOT NULL,
+  `TypeEnigme` CHAR(1) NOT NULL,
+  `Difficulte` CHAR(1) NOT NULL,
+  `estPigee` CHAR(1) NOT NULL,
+  PRIMARY KEY (`idEnigme`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbchevalersk6`.`Reponses`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `dbchevalersk6`.`Reponses` ;
+
+CREATE TABLE IF NOT EXISTS `dbchevalersk6`.`Reponses` (
+  `idReponse` INT NOT NULL,
+  `Lareponse` VARCHAR(45) NOT NULL,
+  `EstBonne` VARCHAR(45) NOT NULL,
+  `idEnigme` INT NOT NULL,
+  PRIMARY KEY (`idReponse`, `idEnigme`),
+  INDEX `fk_Reponses_Enigmes1_idx` (`idEnigme` ASC) ,
+  CONSTRAINT `fk_Reponses_Enigmes1`
+    FOREIGN KEY (`idEnigme`)
+    REFERENCES `dbchevalersk6`.`Enigmes` (`idEnigme`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbchevalersk6`.`Statistiques`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `dbchevalersk6`.`Statistiques` ;
+
+CREATE TABLE IF NOT EXISTS `dbchevalersk6`.`Statistiques` (
+  `idEnigme` INT NOT NULL,
+  `idJoueur` INT NOT NULL,
+  `estReussie` TINYINT NOT NULL,
+  `estEchoue` TINYINT NOT NULL,
+  PRIMARY KEY (`idEnigme`, `idJoueur`),
+  INDEX `fk_Enigmes_has_Joueurs_Joueurs1_idx` (`idJoueur` ASC) ,
+  INDEX `fk_Enigmes_has_Joueurs_Enigmes1_idx` (`idEnigme` ASC) ,
+  CONSTRAINT `fk_Enigmes_has_Joueurs_Enigmes1`
+    FOREIGN KEY (`idEnigme`)
+    REFERENCES `dbchevalersk6`.`Enigmes` (`idEnigme`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Enigmes_has_Joueurs_Joueurs1`
+    FOREIGN KEY (`idJoueur`)
+    REFERENCES `dbchevalersk6`.`Joueurs` (`idJoueur`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dbchevalersk6`.`Demande_ecus`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `dbchevalersk6`.`Demande_ecus` ;
+
+CREATE TABLE IF NOT EXISTS `dbchevalersk6`.`Demande_ecus` (
+  `idDemande_ecus` INT NOT NULL AUTO_INCREMENT,
+  `idJoueur` INT NOT NULL,
+  `flag_accepte` SMALLINT(1) NOT NULL,
+  `Joueurs_idJoueur` INT NOT NULL,
+  PRIMARY KEY (`idDemande_ecus`, `idJoueur`, `Joueurs_idJoueur`),
+  INDEX `fk_Demande_ecus_Joueurs1_idx` (`Joueurs_idJoueur` ASC) ,
+  CONSTRAINT `fk_Demande_ecus_Joueurs1`
+    FOREIGN KEY (`Joueurs_idJoueur`)
+    REFERENCES `dbchevalersk6`.`Joueurs` (`idJoueur`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
