@@ -69,6 +69,7 @@ insert into Elements (idItem, rarete, dangerosite)
 values (pidItem, prarete, pdangerosite);
 commit;
 end |
+
 delimiter |
 create procedure ajouterArmure(
 in pNom varchar(50),
@@ -141,3 +142,6 @@ insert into joueurs (alias,nom,prenom,niveau,estAdmin,motdepasse,courriel)
 values (pAlias,pnom,pPrenom,pNiveau,pEstAdmin,pmotDePasse,pCourriel);
 commit;
 end |
+
+
+---------Ajouter rechercheItem

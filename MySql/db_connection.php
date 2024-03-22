@@ -1,131 +1,89 @@
 <?php
 class DB
 {
-    public $Con = "";
-    public function Connection()
+    public static function Connection()
     {
-        $servername = "localhost";
-        $username = "root";
-        $password = "banane2005";
-        $db = "dbchevalersk6";
-
-        $conn = mysqli_connect($servername, $username, $password, $db);
-        if (!$conn) {
-            die ("Connection failed: " . mysqli_connect_error());
+        try {
+            $mybd = new PDO('mysql:host=localhost;dbname=dbchevalersk6;charset=utf8', 'chevalier6', 'hx843s4s');
+            return $mybd;
+        } catch (PDOException $e) {
+            echo 'Erreur de connexion : ' . $e->getMessage();
+            exit();
         }
-
-        $this->Con = $conn;
     }
-    public function InsertJoueur($prenom, $nom, $alias, $courriel, $mp) {
-        $this->Connection();
-    
-        $sql = "CALL ajouterJoueurs(?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $this->Con->prepare($sql);
-    
-        if ($stmt === false) {
-            echo "Error preparing statement: " . $this->Con->error;
-            return [];
-        }
-    
-        $admin = 0;
-        $solde = 0;
-        $niveau = 0;
-    
-        $stmt->bind_param("sssiiss", $alias, $nom, $prenom, $solde, $niveau, $admin, $mp, $courriel);
-    
-        $result = $stmt->execute();
-    
-        if ($result) {
+    public static function InsertJoueur($alias, $nom, $prenom, $Niveau, $admin, $mp, $courriel)
+    {
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL ajouterJoueurs(?, ?, ?, ?, ?, ?, ?)");
+            $sql->bindParam(1, $alias);
+            $sql->bindParam(2, $nom);
+            $sql->bindParam(3, $prenom);
+            $sql->bindParam(4, $Niveau);
+            $sql->bindParam(5, $admin);
+            $sql->bindParam(6, $mp);
+            $sql->bindParam(7, $courriel);
+            $sql->execute();
             return "Le Joueur est inséré avec succès.";
-        } else {
-            echo "Error executing statement: " . $stmt->error;
-            return [];
+        } catch (PDOException $e) {
+            echo 'Erreur insertion: ' . $e->getMessage();
+            exit();
         }
     }
-    public function InsertArme($nom, $qt, $prix, $photo, $description, $efficacite, $genre)
+    public static function InsertArme($nom, $qt, $prix, $photo, $description, $efficacite, $genre)
     {
-        $this->Connection();
-
-        $sql = "CALL ajouterArme(?, ?, ?, ?, ?, ?, ?)";
-
-        $stmt = $this->Con->prepare($sql);
-
-        if ($stmt === false) {
-            echo "Error preparing statement: " . $this->Con->error;
-            return [];
-        }
-
-        $stmt->bind_param("siissss", $nom, $qt, $prix, $photo, $description, $efficacite, $genre);
-
-        $result = $stmt->execute();
-
-        if ($result) {
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL ajouterArme(?, ?, ?, ?, ?, ?, ?)");
+            $sql->bindParam(1, $nom);
+            $sql->bindParam(2, $qt);
+            $sql->bindParam(3, $prix);
+            $sql->bindParam(4, $photo);
+            $sql->bindParam(5, $description);
+            $sql->bindParam(6, $efficacite);
+            $sql->bindParam(7, $genre);
+            $sql->execute();
             return "Arme insérée avec succès.";
-        } else {
-            echo "Error executing statement: " . $stmt->error;
-            return [];
+        } catch (PDOException $e) {
+            echo 'Erreur insertion: ' . $e->getMessage();
+            exit();
         }
+
     }
-    
+
 
     public function TrouverJoueur($courriel)
     {
-        $this->Connection();
-    
-        $sql = "CALL trouverJoueur(?)";
-    
-        $stmt = $this->Con->prepare($sql);
-    
-        if ($stmt === false) {
-            echo "Error preparing statement: " . $this->Con->error;
-            return [];
-        }
-    
-        $stmt->bind_param("s", $courriel);
-    
-        $result = $stmt->execute();
-    
-        if ($result) {
-            $data = [];
-            $result = $stmt->get_result(); 
-    
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
-            }
-            
-            $stmt->close(); 
-            return $data;
-        } else {
-            echo "Error: " . $this->Con->error;
-            return [];
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL trouverJoueur(?)");
+            $sql->bindParam(1, $courriel);
+            $sql->execute();
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            exit();
         }
     }
-    
 
 
+    //Un Select Général pour l'instant 
     public function Select($columns, $table, $where = '')
     {
-        $this->Connection();
-
-        $sql = "SELECT $columns FROM $table";
-        if (!empty ($where)) {
-            $sql .= " WHERE $where";
-        }
-
-        $result = $this->Con->query($sql);
-
-        if ($result) {
-            $data = [];
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
+        try {
+            $mybd = self::Connection();
+            $sql = "SELECT $columns FROM $table";
+            if (!empty($where)) {
+                $sql .= " WHERE $where";
             }
-            $result->free();
-            return $data;
-        } else {
-            echo "Error: " . $this->Con->error;
-            return [];
+            $stmt = $mybd->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            exit();
         }
     }
 
 }
 
+?>
