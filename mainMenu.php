@@ -1,4 +1,7 @@
 <?php
+require 'php/sessionManager.php';
+
+
 $content = <<<HTML
     <div class="content">
 
@@ -65,4 +68,4 @@ $content = <<<HTML
     </script>
 HTML;
 include "views/master.php";
-?>
+

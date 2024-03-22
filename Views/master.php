@@ -3,9 +3,6 @@
     $styles = file_get_contents("views/styles.html");
     $scripts = file_get_contents("views/scripts.html");
 
-    if (!isset($scriptsBundle)) $scriptsBundle = "";
-    if(!isset($viewScript)) $viewScript = "";
-
     echo <<<HTML
     <!DOCTYPE html>
         <html>
