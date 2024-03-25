@@ -101,7 +101,12 @@
             <h2 class="title">Création de compte</h2>
         </div>
         <div id="content">
+<<<<<<< HEAD
             <form class="form" id="subscribeform" action="$actionUrl" method="POST">
+=======
+            <form class="form" id="subscribeform" action="confirmSignup.php" method="POST">
+                <label class="avatar" for="file"><span></span></label>                
+>>>>>>> parent of 1247ec6 (SIGN UP)
                 <div class="inputbox">
                     <input class="formControl" name="FirstName" id="FirstName" required requireMessage="Veuillez entrer votre prenom"  type="text">
                     <span>Prenom</span>
@@ -139,9 +144,13 @@
                 </div><br />
                 <div class="div-button">
                     <button type="button" onclick="window.location.href='login.php'" class="button">Cancel</button>
+<<<<<<< HEAD
                     <a href="your_destination_url_here">
                         <button class="button">Sign Up</button>
                     </a>
+=======
+                    <input type="submit">
+>>>>>>> parent of 1247ec6 (SIGN UP)
                 </div>
             </form>
         </div>
