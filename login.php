@@ -32,7 +32,7 @@ if(!isset($_SESSION['currentPlayer'])){
            </form>
            </div>
                     <div class="div-button">
-                        <a href="signup.php">
+                        <a href="signin.php">
                             <button class="formControl button-SignUn" type="button" value="Sign Un">Sign Up</button>                
                         </a> 
                     </div>
