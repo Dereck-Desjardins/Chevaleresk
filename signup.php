@@ -106,6 +106,9 @@
 =======
             <form class="form" id="subscribeform" action="confirmSignup.php" method="POST">
                 <label class="avatar" for="file"><span></span></label>                
+<<<<<<< HEAD
+>>>>>>> parent of 1247ec6 (SIGN UP)
+=======
 >>>>>>> parent of 1247ec6 (SIGN UP)
                 <div class="inputbox">
                     <input class="formControl" name="FirstName" id="FirstName" required requireMessage="Veuillez entrer votre prenom"  type="text">
@@ -145,9 +148,13 @@
                 <div class="div-button">
                     <button type="button" onclick="window.location.href='login.php'" class="button">Cancel</button>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <a href="your_destination_url_here">
                         <button class="button">Sign Up</button>
                     </a>
+=======
+                    <input type="submit">
+>>>>>>> parent of 1247ec6 (SIGN UP)
 =======
                     <input type="submit">
 >>>>>>> parent of 1247ec6 (SIGN UP)
