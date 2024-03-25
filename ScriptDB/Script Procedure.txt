@@ -69,6 +69,7 @@ insert into Elements (idItem, rarete, dangerosite)
 values (pidItem, prarete, pdangerosite);
 commit;
 end |
+
 delimiter |
 create procedure ajouterArmure(
 in pNom varchar(50),
@@ -113,15 +114,13 @@ end if;
 end if;
 END |;
 
-
 DELIMITER |
 
 CREATE PROCEDURE trouverJoueur(
-    IN pcourriel VARCHAR(45),
-    IN pmotDePasse VARCHAR(20)
+    IN pcourriel VARCHAR(45)
 )
 BEGIN
-    SELECT * FROM Joueurs WHERE courriel = pcourriel AND motdepasse = pmotDePasse;
+    SELECT * FROM joueurs WHERE courriel = pcourriel;
 END |
 
 DELIMITER ;
@@ -139,11 +138,10 @@ in pCourriel varchar(45)
 )
 begin
 start transaction ;
-insert into Joueurs (alias,nom,prenom,niveau,estAdmin,motdepasse,courriel)
+insert into joueurs (alias,nom,prenom,niveau,estAdmin,motdepasse,courriel)
 values (pAlias,pnom,pPrenom,pNiveau,pEstAdmin,pmotDePasse,pCourriel);
 commit;
 end |
 
 
---------Ajouter rechercheItem
------ALTER taille pour varchar(25)
+---------Ajouter rechercheItem
