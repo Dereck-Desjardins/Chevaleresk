@@ -8,7 +8,7 @@
             background-color: #2b2d31;
         }
         .title{
-            color: #37FF8B;
+            color: #2CB3F0;
         }
         #main {
             text-align: center;
@@ -47,7 +47,7 @@
             left: 0;
             padding: 20px 10px 10px;
             font-size: 1em;
-            color: #37FF8B;
+            color: white;
             letter-spacing: 00.05em;
             transition: 0.5s;
             pointer-events: none;
@@ -55,7 +55,7 @@
 
         .inputbox input:valid ~span,
         .inputbox input:focus ~span {
-            color: #37FF8B;
+            color: white;
             transform: translateX(-10px) translateY(-34px);
             font-size: 0.75em;
         }
@@ -66,7 +66,7 @@
             bottom: 0;
             width: 100%;
             height: 2px;
-            background-color: #37FF8B;
+            background-color: #2CB3F0;
             border-radius: 4px;
             transition: 0.5s;
             pointer-events: none;
@@ -77,17 +77,11 @@
         .inputbox input:focus ~i {
             height: 44px;
         }
-
-        .img{
-            border-radius: 25px;
-            height: 200px;
-            width: 300;
-        }
         .button {
             width: 148px;
             color: black;
             border: none;
-            background-color: #37FF8B;
+            background-color: #2CB3F0;
             height: 35px;
             border-radius: 5px;
             transition: all ease 0.1s;
@@ -99,16 +93,6 @@
             justify-content: space-between;
             margin-top: 10px;
         }
-        .avatar {
-            height: 50px;
-            width: 50px;
-            background-color: rgb(23, 111, 211);
-            border-radius: 50%;
-            align-self: center;
-            padding: 6px;
-            cursor: pointer;
-            box-shadow: 12.5px 12.5px 10px rgba(0, 0, 0, 0.015),100px 100px 80px rgba(0, 0, 0, 0.03);
-        }
     </style>
 </head>
 <body>
@@ -117,8 +101,7 @@
             <h2 class="title">Création de compte</h2>
         </div>
         <div id="content">
-            <form class="form" id="subscribeform" action="confirmSignup.php" method="POST">
-                <label class="avatar" for="file"><span></span></label>                
+            <form class="form" id="subscribeform" action="$actionUrl" method="POST">
                 <div class="inputbox">
                     <input class="formControl" name="FirstName" id="FirstName" required requireMessage="Veuillez entrer votre prenom"  type="text">
                     <span>Prenom</span>
@@ -156,7 +139,9 @@
                 </div><br />
                 <div class="div-button">
                     <button type="button" onclick="window.location.href='login.php'" class="button">Cancel</button>
-                    <input type="submit">
+                    <a href="your_destination_url_here">
+                        <button class="button">Sign Up</button>
+                    </a>
                 </div>
             </form>
         </div>

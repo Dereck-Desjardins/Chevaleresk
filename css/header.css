@@ -7,7 +7,7 @@ body{
 --border-right: 6px;
 --text-stroke-color: rgba(255,255,255,0.6);
 --animation-color: #37FF8B;
---fs-size: 2em;
+--fs-size: 3em;
 letter-spacing: 3px;
 text-decoration: none;
 font-size: var(--fs-size);
@@ -65,14 +65,14 @@ display: inline;
 .menuNavigation{
 width: 100%;
 position: fixed;
-padding: 0px 10px 10px 0px;
 margin-bottom: 10px;
 height: auto;
 border-style: solid;
 border-width: 0px;
 border-bottom-width: 5px;
-text-align: center;
+/* text-align: center; */
 background-color: #2b2d31;
+align-items:flex-start;
 }
 .itemNavigation{  
 font-size: 2.5em;
@@ -82,7 +82,7 @@ padding:0px 30px 0px 30px;
 
 }
 .titleNavigation{  
-font-size: 4em;
+font-size: 10em;
 text-decoration: none;
 color: inherit;
 padding:0px 30px 0px 30px;
@@ -91,3 +91,13 @@ padding:0px 30px 0px 30px;
 padding-top: 120px;
 font-size: 2em;
 }
+
+.img {
+border-radius: 25px;
+height: 100%;
+width: 3%;
+display: inline-block;
+vertical-align: middle;
+padding-bottom: 2%;
+}
+
