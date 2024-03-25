@@ -1,7 +1,9 @@
 <?php
+require 'php/sessionManager.php';
+
+
 $content = <<<HTML
     <div class="content">
-
         <div class="slider">
             <div class="slide">
                 <img src="Image/darkvader.png" alt="Slide 1">
@@ -24,7 +26,6 @@ $content = <<<HTML
             Provident officia est, inventore, cum beatae illo ipsam maxime quaerat at praesentium fuga! Expedita corrupti esse minima minus laborum delectus, repudiandae, modi eaque rem eveniet veniam quo deleniti dicta voluptatibus?
         </div>
     </div>
-
     <style>
         img{
             padding-bottom: 2%;
@@ -45,12 +46,10 @@ $content = <<<HTML
             height: 600px;
         }
     </style>
-
     <!-- Script JavaScript pour le slider -->
     <script>
         var slideIndex = 0;
         carousel();
-
         function carousel() {
             var i;
             var slides = document.getElementsByClassName("slide");
@@ -65,4 +64,3 @@ $content = <<<HTML
     </script>
 HTML;
 include "views/master.php";
-?>

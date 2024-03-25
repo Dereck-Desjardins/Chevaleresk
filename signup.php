@@ -112,77 +112,56 @@
     </style>
 </head>
 <body>
+<?php
+        $SignUpError = isset($_SESSION['SignUpError'])? $_SESSION['SignUpError'] : '';
+        //Pourra affiché l'erreur quand css arrangé :)
+   ?>
     <div id="main">
         <div id="header">
             <h2 class="title">Création de compte</h2>
         </div>
         <div id="content">
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <form class="form" id="subscribeform" action="$actionUrl" method="POST">
-=======
             <form class="form" id="subscribeform" action="confirmSignup.php" method="POST">
-                <label class="avatar" for="file"><span></span></label>                
-<<<<<<< HEAD
->>>>>>> parent of 1247ec6 (SIGN UP)
-=======
->>>>>>> parent of 1247ec6 (SIGN UP)
-=======
-            <form class="form" id="subscribeform" action="confirmSignup.php" method="POST">
-                <label class="avatar" for="file"><span></span></label>                
->>>>>>> parent of 719dafc (Header)
+                <label class="avatar" for="file"><span></span></label>
                 <div class="inputbox">
-                    <input class="formControl" name="FirstName" id="FirstName" required requireMessage="Veuillez entrer votre prenom"  type="text">
+                    <input class="formControl" name="Alias" required requireMessage="Veuillez entrer votre alias"  type="text">
+                    <span>Alias</span>
+                    <i></i>
+                </div>     
+                <div class="inputbox">
+                    <input class="formControl" name="Name"  required requireMessage="Veuillez entrer votre nom"  type="text">
+                    <span>Nom</span>
+                    <i></i>
+                </div>           
+                <div class="inputbox">
+                    <input class="formControl" name="FirstName"  required requireMessage="Veuillez entrer votre prenom"  type="text">
                     <span>Prenom</span>
                     <i></i>
                 </div>
                 <div class="inputbox">
-                    <input class="formControl" name="Nom" id="Nom" required requireMessage="Veuillez entrer votre nom"  type="text">
-                    <span>Nom</span>
+                    <input type="password" class="formControl" name="Password" required requireMessage="Veuillez entrer votre mot de passe"  type="text">
+                    <span>Mot de passe</span>
                     <i></i>
                 </div>
                 <div class="inputbox">
-                    <input class="formControl" name="Username" id="Username" required requireMessage="Veuillez entrer votre Username"  type="text">
-                    <span>Username</span>
+                    <input type="password" class="formControl" name="PasswordConfirm"  required requireMessage="Veuillez entrer votre mot de passe">
+                    <span>Mot de passe confirmation</span>
                     <i></i>
                 </div>
                 <div class="inputbox">
-                    <input type="Email " class="formControl" name="Courriel" id="Courriel" required requireMessage="Veuillez entrer votre Courriel">
+                    <input type="Email " class="formControl" name="Email"  required requireMessage="Veuillez entrer votre Courriel">
                     <span>Courriel</span>
                     <i></i>
                 </div>
                 <div class="inputbox">
-                    <input type="Email" class="formControl" name="Emailconfirmation" id="Emailconfirmation" required requireMessage="Veuillez entrer votre courriel">
+                    <input type="Email" class="formControl" name="Emailconfirmation"  required requireMessage="Veuillez entrer votre courriel">
                     <span>Courriel confirmation</span>
                     <i></i>
                 </div>
-                <div class="inputbox">
-                    <input type="password" class="formControl" name="MDP" id="MDP" required requireMessage="Veuillez entrer votre mot de passe"  type="text">
-                    <span>Mot de passe</span>
-                    <i></i>
-                </div>
-                <div class="inputbox">
-                    <input type="password" class="formControl" name="MDPConfirm" id="MDPConfirm" required requireMessage="Veuillez entrer votre mot de passe">
-                    <span>Mot de passe</span>
-                    <i></i>
-                </div><br />
+               <br />
                 <div class="div-button">
-                    <button type="button" onclick="window.location.href='login.php'" class="button">Cancel</button>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    <a href="your_destination_url_here">
-                        <button class="button">Sign Up</button>
-                    </a>
-=======
-                    <input type="submit">
->>>>>>> parent of 1247ec6 (SIGN UP)
-=======
-                    <input type="submit">
->>>>>>> parent of 1247ec6 (SIGN UP)
-=======
-                    <input type="submit">
->>>>>>> parent of 719dafc (Header)
+                    <button type="button" onclick="window.location.href='login.php'" class="button">Annuler</button>
+                    <input type="submit" class="button">
                 </div>
             </form>
         </div>
