@@ -1,7 +1,8 @@
 <?php
-$content = <<<HTML
-     <div class="content">
-            <a class="logout" href="logout.php"><button>Se déconnecter</button></a>
+    $content = <<<HTML
+        <div class="content">
+            
         </div>
-     HTML;
-include "views/master.php";
+    HTML;
+    include "views/master.php";
+?>

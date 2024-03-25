@@ -1,5 +1,5 @@
 <?php
-include_once "MySql/db_connection.php";
+
 class Joueurs
 {
     public $Id;
@@ -13,23 +13,29 @@ class Joueurs
 
     public $Courriel;
 
-    public function __construct($email,$mp)
+    public function __construct($email)
     {
-
-            $result = DB::TrouverJoueur($email,$mp);
+        try {
+            $result = DB::TrouverJoueuer($email);
 
             if ($result) {
-                $this->Id = $result[0]['idJoueur'];
-                $this->Alias = $result[0]['alias'];
-                $this->Prenom = $result[0]['prenom'];
-                $this->Nom = $result[0]['nom'];
-                $this->Courriel = $result[0]['courriel'];
-                $this->Niveau = $result[0]['niveau'];
-                $this->EstAdmin = $result[0]['estAdmin'];
-                $this->Solde = $result[0]['solde'];
+                $row = $result->fetch();
+                $this->Id = $row['id'];
+                $this->Alias = $row['alias'];
+                $this->Prenom = $row['prenom'];
+                $this->Nom = $row['nom'];
+                $this->Courriel = $row['courriel'];
+                $this->Niveau = $row['niveau'];
+                $this->EstAdmin = $row['estAdmin'];
+                $this->Solde = $row['solde'];
             } else {
-                throw new Exception('');
+                throw new Exception('Player not found');
             }
+
+            $connection = null;
+        } catch (PDOException $e) {
+            throw new Exception('Database error: ' . $e->getMessage());
+        }
     } 
     public function getId(){
         return $this->Id;
@@ -53,4 +59,6 @@ class Joueurs
         return $this->Courriel;
     }
 
+    //quand on creer un compte, call la procedure stocké de la db pour creer un compte et lui passer en 
+    //parameteres les infos
 }

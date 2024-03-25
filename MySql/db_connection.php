@@ -4,8 +4,7 @@ class DB
     public static function Connection()
     {
         try {
-            $mybd = new 
-            PDO('mysql:host=167.114.152.54;dbname=dbchevalersk6;charset=utf8', 'chevalier6', 'hx843s4s');
+            $mybd = new PDO('mysql:host=localhost;dbname=dbchevalersk6;charset=utf8', 'chevalier6', 'hx843s4s');
             return $mybd;
         } catch (PDOException $e) {
             echo 'Erreur de connexion : ' . $e->getMessage();
@@ -52,13 +51,13 @@ class DB
 
     }
 
-    public static function TrouverJoueur($courriel,$mp)
+
+    public function TrouverJoueur($courriel)
     {
         try {
             $mybd = self::Connection();
-            $sql = $mybd->prepare("CALL trouverJoueur(?,?)");
+            $sql = $mybd->prepare("CALL trouverJoueur(?)");
             $sql->bindParam(1, $courriel);
-            $sql->bindParam(2, $mp);
             $sql->execute();
             return $sql->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
@@ -67,8 +66,9 @@ class DB
         }
     }
 
+
     //Un Select Général pour l'instant 
-    public static function Select($columns, $table, $where = '')
+    public function Select($columns, $table, $where = '')
     {
         try {
             $mybd = self::Connection();
