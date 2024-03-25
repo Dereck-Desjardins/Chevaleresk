@@ -66,6 +66,12 @@ class DB
             exit();
         }
     }
+    public static function getAllItems() {
+        $mybd = self::Connection();
+        $sql = $mybd->prepare("SELECT * FROM Items");
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_OBJ);
+    }
 
     //Un Select Général pour l'instant 
     public static function Select($columns, $table, $where = '')

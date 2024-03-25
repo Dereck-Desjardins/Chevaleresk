@@ -1,23 +1,29 @@
 <?php
+include 'php/sessionManager.php';
+include 'php/formUtilities.php';
+include 'MySql/db_connection.php';
 
+$allItems = DB::getAllItems();
 
+$ImageFolder = "data/img/";
 
 $content = '<div class="content"><div class="itemContainer">';
 //Ajouter les filtres et tri
 
+
 foreach($allItems as $oneItem){
-    $id = $oneItem->Id;
-    $nom = $oneItem->Nom;
-    $quantite = $oneItem->QuantiteStock; 
-    $typeItem = $oneItem->TypeItem;
-    $prix = $oneItem->Prix;
-    $photo = $oneItem->Photo;
+    $id = $oneItem->idItem;
+    $nom = $oneItem->nom;
+    $quantite = $oneItem->quantiteStock; 
+    $typeItem = $oneItem->typeItem;
+    $prix = $oneItem->prix;
+    $photo = $oneItem->photo;
 
     if($quantite > 0){
       $ItemHTML = <<<HTML
         <div class="itemLayout">
             <div class="shopItemLeft">
-                <img src="$photo" alt="" class="photoItemShop">
+                <img src="$ImageFolder$photo" alt="" class="photoItemShop">
             </div>
         
             <div class="shopItemMiddle">
@@ -31,13 +37,13 @@ foreach($allItems as $oneItem){
             </div>
 
         </div>
-      
-
       HTML;
-    }
 
+      $content .= $ItemHTML;
+    }
 }           
 
-     
-    $content = $content + '</div></div>';
-    include "views/master.php";
+$content .= '</div></div>';
+
+include "views/master.php";
+?>
