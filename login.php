@@ -26,9 +26,39 @@ $content = <<<HTML
                         <button class="formControl button-SignUn" type="button" value="Sign Un">Sign Up</button>                
                     </a> 
                 </div>
+<<<<<<< HEAD
        </form>
       </div>
      </div>            
     </div>
     HTML;
+=======
+                <br />
+                <div class="inputbox">
+                    <input type="password" class="formControl" name="MDP" id="MDP" required requireMessage="Veuillez entrer votre mot de passe"  >
+                    <span>Mot de passe</span>
+                    <i></i>
+                </div>
+                <span style='color:red'>$LoginError</span>
+                <br />
+                <div>
+                    <input name='submit' class="formControl button-SignIn" type="submit" value="Se connecter" />
+                </div>
+           </form>
+           </div>
+                    <div class="div-button">
+                        <a href="signin.php">
+                            <button class="formControl button-SignUn" type="button" value="Sign Un">Sign Up</button>                
+                        </a> 
+                    </div>
+          </div>
+         </div>            
+        </div>
+        HTML;
+}
+else{
+   redirect('profil.php');
+}
+
+>>>>>>> parent of 76f2f57 (Merge branch 'main' of https://github.com/Dereck-Desjardins/Chevaleresk)
 include "views/master.php";
