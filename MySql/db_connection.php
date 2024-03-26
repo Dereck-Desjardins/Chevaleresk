@@ -51,6 +51,22 @@ class DB
         }
 
     }
+    public static function FIndItemInv($idItem,$idJoueur,$Qt)
+    {
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL ajouterItemInv(?, ?, ?)");
+            $sql->bindParam(1, $idItem);
+            $sql->bindParam(2, $idJoueur);
+            $sql->bindParam(3, $Qt);
+            $sql->execute();
+            return "Item insérée dans l'inventaire avec succès.";
+        } catch (PDOException $e) {
+            echo 'Erreur insertion: ' . $e->getMessage();
+            exit();
+        }
+
+    }
 
     public static function TrouverJoueur($courriel,$mp)
     {
@@ -65,6 +81,21 @@ class DB
             echo 'Erreur : ' . $e->getMessage();
             exit();
         }
+    }
+    public static function FIndDetailsItem($idItem,$type)
+    {
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL rechercherItem(?, ?)");
+            $sql->bindParam(1, $idItem);
+            $sql->bindParam(2, $type);
+            $sql->execute();
+            return $sql->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            echo 'Erreur recherche: ' . $e->getMessage();
+            exit();
+        }
+
     }
     public static function getAllItems() {
         $mybd = self::Connection();

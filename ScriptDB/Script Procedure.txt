@@ -5,6 +5,8 @@ drop procedure if exists ajouterElement;
 drop procedure if exists ajouterArmure;
 drop procedure if exists trouverJoueur;
 drop procedure if exists ajouterJoueurs;
+drop procedure if exists ajouterItemInv;
+drop procedure if exists CTRL_InsertItems;
 drop trigger if exists CTRLInsertItems;
 
 
@@ -144,4 +146,34 @@ commit;
 end |
 
 
----------Ajouter rechercheItem
+delimiter |
+create procedure ajouterItemInv(
+in pidItem int,
+in pidJ int,
+in pQt int
+)
+begin
+start transaction ;
+insert Inventaires values (pidItem,pidJ,pQt);
+commit;
+end |
+DELIMITER //
+
+CREATE TRIGGER CTRL_InsertItems
+BEFORE INSERT ON Inventaires
+FOR EACH ROW
+BEGIN
+    DECLARE itemExists INT;
+
+    -- Vérifier si l'objet existe déjà dans l'inventaire du joueur
+    SELECT COUNT(*) INTO itemExists FROM Inventaires WHERE dItem = NEW.dItem AND idJoueur = NEW.idJoueur;
+
+    -- Si l'objet existe déjà, mettre à jour la quantité
+    IF itemExists > 0 THEN
+        UPDATE Inventaires SET quantiteInventaire = quantiteInventaire + NEW.quantiteInventaire WHERE dItem = NEW.dItem AND idJoueur = NEW.idJoueur;
+        -- Annuler l'insertion de la nouvelle ligne
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Objet déjà présent dans l\'inventaire, la quantité a été mise à jour.';
+    END IF;
+END //
+
+DELIMITER ;
