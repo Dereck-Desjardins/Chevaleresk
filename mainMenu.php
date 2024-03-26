@@ -6,10 +6,10 @@ $content = <<<HTML
     <div class="content">
         <div class="slider">
             <div class="slide">
-                <img src="Image/darkvader.png" alt="Slide 1">
+                <img src="data\img/Image/darkvader.png" alt="Slide 1">
             </div>
             <div class="slide">
-                <img src="Image/wood.jpg" alt="Slide 2">
+                <img src="data\img/Image/wood.jpg" alt="Slide 2">
             </div>
             <!-- Ajoutez plus de diapositives si nécessaire -->
         </div>
