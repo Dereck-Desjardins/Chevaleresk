@@ -82,13 +82,12 @@ class DB
             exit();
         }
     }
-    public static function FIndDetailsItem($idItem,$type)
+    public static function FindDetailsItem($idItem)
     {
         try {
             $mybd = self::Connection();
-            $sql = $mybd->prepare("CALL rechercherItem(?, ?)");
+            $sql = $mybd->prepare("CALL rechercherItem(?)");
             $sql->bindParam(1, $idItem);
-            $sql->bindParam(2, $type);
             $sql->execute();
             return $sql->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {

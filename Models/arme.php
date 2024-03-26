@@ -1,13 +1,11 @@
 <?php
 
-class Items 
+class Arme extends Items
 {
-    public $Id;
-    public $Nom;
-    public $QuantiteStock;
-    public $TypeItem;
-    public $Prix;
-    public $Photo;
+    public $Description;
+    public $Efficacite;
+    public $Genre;
+
 
     public function __construct(){
         $this->Id = 0;
@@ -16,22 +14,18 @@ class Items
         $this->TypeItem = "";
         $this->Prix = 0;
         $this->Photo = "";
+        $this->Description = "";
+        $this->Efficacite = "";
+        $this->Genre = "";        
     }
 
-    public Function setNom($nom){
-        $this->Nom = $nom; 
+    public Function setDescription($description){
+        $this->Description = $description; 
     }
-
-    public Function setQuantiteStock($quantiteStock){
-        $this->Nom = $quantiteStock; 
+    public Function setEfficacite($efficacite){
+        $this->Efficacite = $efficacite; 
     }
-    public Function setTypeItem($typeItem){
-        $this->Nom = $typeItem; 
-    }
-    public Function setPrix($prix){
-        $this->Nom = $prix; 
-    }
-    public Function setPhoto($photo){
-        $this->Nom = $photo; 
+    public Function setGenre($genre){
+        $this->Genre = $genre; 
     }
 }

@@ -1,13 +1,9 @@
 <?php
 
-class Items 
+class Element extends Items
 {
-    public $Id;
-    public $Nom;
-    public $QuantiteStock;
-    public $TypeItem;
-    public $Prix;
-    public $Photo;
+    public $Rarete;
+    public $Dangerosite;
 
     public function __construct(){
         $this->Id = 0;
@@ -16,22 +12,15 @@ class Items
         $this->TypeItem = "";
         $this->Prix = 0;
         $this->Photo = "";
+        $this->Rarete = "";
+        $this->Dangerosite = "";
     }
 
-    public Function setNom($nom){
-        $this->Nom = $nom; 
+    public Function setRarete($rarete){
+        $this->Rarete = $rarete; 
     }
 
-    public Function setQuantiteStock($quantiteStock){
-        $this->Nom = $quantiteStock; 
-    }
-    public Function setTypeItem($typeItem){
-        $this->Nom = $typeItem; 
-    }
-    public Function setPrix($prix){
-        $this->Nom = $prix; 
-    }
-    public Function setPhoto($photo){
-        $this->Nom = $photo; 
+    public Function setDangerosite($dangerosite){
+        $this->Dangerosite = $dangerosite; 
     }
 }

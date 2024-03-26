@@ -1,13 +1,11 @@
 <?php
 
-class Items 
+class Potion extends Items
 {
-    public $Id;
-    public $Nom;
-    public $QuantiteStock;
-    public $TypeItem;
-    public $Prix;
-    public $Photo;
+    public $Duree;
+    public $Effet;
+    public $TypePotion;
+
 
     public function __construct(){
         $this->Id = 0;
@@ -16,22 +14,18 @@ class Items
         $this->TypeItem = "";
         $this->Prix = 0;
         $this->Photo = "";
+        $this->Duree = 0;
+        $this->Effet = "";
+        $this->TypePotion = "";        
     }
 
-    public Function setNom($nom){
-        $this->Nom = $nom; 
+    public Function setDuree($duree){
+        $this->Duree = $duree; 
     }
-
-    public Function setQuantiteStock($quantiteStock){
-        $this->Nom = $quantiteStock; 
+    public Function setEffet($effet){
+        $this->Effet = $effet; 
     }
-    public Function setTypeItem($typeItem){
-        $this->Nom = $typeItem; 
-    }
-    public Function setPrix($prix){
-        $this->Nom = $prix; 
-    }
-    public Function setPhoto($photo){
-        $this->Nom = $photo; 
+    public Function setTypePotion($typePotion){
+        $this->TypePotion = $typePotion; 
     }
 }

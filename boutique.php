@@ -23,7 +23,9 @@ foreach($allItems as $oneItem){
       $ItemHTML = <<<HTML
         <div class="itemLayout">
             <div class="shopItemLeft">
-                <img src="$ImageFolder$photo" alt="" class="photoItemShop">
+                <a href="detailItem.php?id=$id">
+                    <img src="$ImageFolder$photo" alt="" class="photoItemShop">
+                </a>    
             </div>
         
             <div class="shopItemMiddle">

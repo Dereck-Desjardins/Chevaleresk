@@ -23,15 +23,15 @@ class Items
     }
 
     public Function setQuantiteStock($quantiteStock){
-        $this->Nom = $quantiteStock; 
+        $this->QuantiteStock = $quantiteStock; 
     }
     public Function setTypeItem($typeItem){
-        $this->Nom = $typeItem; 
+        $this->TypeItem = $typeItem; 
     }
     public Function setPrix($prix){
-        $this->Nom = $prix; 
+        $this->Prix = $prix; 
     }
     public Function setPhoto($photo){
-        $this->Nom = $photo; 
+        $this->Photo = $photo; 
     }
 }
