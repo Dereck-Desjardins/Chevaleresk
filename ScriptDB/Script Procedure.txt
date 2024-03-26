@@ -6,8 +6,11 @@ drop procedure if exists ajouterArmure;
 drop procedure if exists trouverJoueur;
 drop procedure if exists ajouterJoueurs;
 drop procedure if exists ajouterItemInv;
-drop procedure if exists CTRL_InsertItems;
+drop procedure if exists rechercherItem;
+drop procedure if exists avoirInventaireJ;
+
 drop trigger if exists CTRLInsertItems;
+drop trigger if exists CTRL_InsertItemsINV;
 
 
 delimiter |
@@ -119,10 +122,11 @@ END |;
 DELIMITER |
 
 CREATE PROCEDURE trouverJoueur(
-    IN pcourriel VARCHAR(45)
+    IN pcourriel VARCHAR(45),
+    IN pmp VARCHAR(20)
 )
 BEGIN
-    SELECT * FROM joueurs WHERE courriel = pcourriel;
+    SELECT * FROM Joueurs WHERE courriel = pcourriel AND motdepasse = pmp;
 END |
 
 DELIMITER ;
@@ -159,7 +163,7 @@ commit;
 end |
 DELIMITER //
 
-CREATE TRIGGER CTRL_InsertItems
+CREATE TRIGGER CTRL_InsertItemsINV
 BEFORE INSERT ON Inventaires
 FOR EACH ROW
 BEGIN
@@ -175,5 +179,37 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Objet déjà présent dans l\'inventaire, la quantité a été mise à jour.';
     END IF;
 END //
+
+DELIMITER ;
+
+DELIMITER |
+
+CREATE PROCEDURE rechercherItem(
+    IN pid INT
+)
+BEGIN
+DECLARE pTypeItem int ;
+ SELECT typeItem INTO pTypeItem FROM Items WHERE idItem = pid;
+    IF pTypeItem = 'R' THEN
+        SELECT taille, matiere FROM Armures WHERE idItem = pid INTO @taille, @matiere;
+    ELSEIF pTypeItem = 'A' THEN
+        SELECT description, efficacite, genre FROM Armes WHERE idItem = pid INTO @description, @efficacite, @genre;
+    ELSEIF pTypeItem = 'P' THEN
+        SELECT duree, effet, TypePotion FROM Potions WHERE idItem = pid INTO @duree, @effet, @TypePotion;
+    ELSEIF pTypeItem = 'E' THEN
+        SELECT Rarete, dangerosite FROM Elements WHERE idItem = pid INTO @Rarete, @dangerosite;
+    END IF;
+END |
+
+DELIMITER ;
+
+DELIMITER |
+
+CREATE PROCEDURE avoirInventaireJ(
+    IN pid INT
+)
+BEGIN
+  SELECT * FROM Inventaires WHERE idJoueur = pid;
+END |
 
 DELIMITER ;

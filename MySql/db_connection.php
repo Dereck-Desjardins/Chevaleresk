@@ -95,7 +95,6 @@ class DB
             echo 'Erreur recherche: ' . $e->getMessage();
             exit();
         }
-
     }
     public static function getAllItems() {
         $mybd = self::Connection();

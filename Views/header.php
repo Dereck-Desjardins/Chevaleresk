@@ -4,7 +4,7 @@
     $header = <<< HTML
     <div class="menuNavigation">
         <div>
-            <img class="img"src="Image/logo.jpg" alt="">
+            <img class="img"src="data\img/Image/logo.jpg" alt="">
             <button class="button" data-text="Chevaleresk">
                 <a class="actual-text,titleNavigation">Chevaleresk</a>
                 <a href="mainMenu.php" aria-hidden="true" class="hover-text">Chevaleresk</a>
@@ -27,4 +27,3 @@
         </div>
     </div>
     HTML;
-?>
