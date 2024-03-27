@@ -51,6 +51,20 @@ class DB
         }
 
     }
+    public static function BuyBuyCart($idItem,$idJoueur,$QtItem){
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL ajouterItemInv(?, ?, ?)");
+            $sql->bindParam(1, $idItem);
+            $sql->bindParam(2, $idJoueur);
+            $sql->bindParam(3, $QtItem);
+            $sql->execute();
+            return "Bon achat";
+        } catch (PDOException $e) {
+            echo 'Erreur insertion: ' . $e->getMessage();
+            exit();
+        }
+    }
     public static function FIndItemInv($idItem,$idJoueur,$Qt)
     {
         try {
