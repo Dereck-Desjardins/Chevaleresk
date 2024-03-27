@@ -1,6 +1,6 @@
 <?php
 
-class Items 
+class Item 
 {
     public $Id;
     public $Nom;

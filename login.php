@@ -3,9 +3,9 @@ require 'php/sessionManager.php';
 
 
 
-if(!isset($_SESSION['currentPlayer'])){
-    $Email = isset ($_SESSION['Email']) ? $_SESSION['Email'] : '';
-    $LoginError = isset($_SESSION['LoginError'])? $_SESSION['LoginError'] : '';
+if (!isset($_SESSION['currentPlayer'])) {
+    $Email = isset($_SESSION['Email']) ? $_SESSION['Email'] : '';
+    $LoginError = isset($_SESSION['LoginError']) ? $_SESSION['LoginError'] : '';
 
     $content = <<<HTML
         <div class="loginContent">
@@ -31,18 +31,17 @@ if(!isset($_SESSION['currentPlayer'])){
                 </div>
            </form>
            </div>
-                    <div class="div-button">
+           <div class="div-button">
                     <a href="signup.php">
-                        <button class="formControl button-SignUn" type="button" value="Sign Un">Sign Up</button>                
+                        <button class="formControl button-SignUp" type="button" value="Sign Un">Sign Up</button>                
                         </a> 
-                    </div>
+            </div>     
           </div>
          </div>            
         </div>
         HTML;
-}
-else{
-   redirect('profil.php');
+} else {
+    redirect('profil.php');
 }
 
 include "views/master.php";

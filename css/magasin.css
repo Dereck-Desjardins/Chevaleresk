@@ -39,8 +39,8 @@
     width: 90px;
     padding-left: 10px;
 }
-.bouton{
-    background-color: rgb(160, 9, 9);
+.bouton {
+    background-color: #117964;
     color: white;
     border: none;
     padding: 5px;
@@ -48,4 +48,14 @@
 .itemContainer{
     width:80%;
     margin: auto;
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    transition: background-color 0.3s ease; 
+}
+
+/* Hover effect */
+.bouton:hover {
+    background-color: #0f5e4e; 
 }

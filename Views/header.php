@@ -2,28 +2,23 @@
     $styles = "css/header.css";
     $pageTitle = "Chevaleresk";
     $header = <<< HTML
-    <div class="menuNavigation">
-        <div>
-            <img class="img"src="data\img/Image/logo.jpg" alt="">
-            <button class="button" data-text="Chevaleresk">
-                <a class="actual-text,titleNavigation">Chevaleresk</a>
-                <a href="mainMenu.php" aria-hidden="true" class="hover-text">Chevaleresk</a>
-            </button>
-            <button class="button" data-text="Panoramix">
-                <a class="actual-text,itemNavigation">Panoramix</a>
-                <a href="Panoramix.php" aria-hidden="true" class="hover-text">Panoramix</a>
-            </button>
-            <button class="button" data-text="Enigma">
-                <a class="actual-text,itemNavigation">Enigma</a>
-                <a href="Enigma.php" aria-hidden="true" class="hover-text">Enigma</a>
-            </button>
-            <button class="button" data-text="Boutique">
-                <a class="actual-text,itemNavigation">Boutique</a>
-                <a href="Boutique.php" aria-hidden="true" class="hover-text">Boutique</a>
-            </button><button class="button" data-text="Profil">
-                <a class="actual-text,itemNavigation">Profil</a>
-                <a href="login.php" aria-hidden="true" class="hover-text">Profil</a>
-            </button>
-        </div>
-    </div>
+    <nav class="navbar">
+      <div class="navbar-container container">
+          <input type="checkbox" name="" id="">
+          <div class="hamburger-lines">
+              <span class="line line1"></span>
+              <span class="line line2"></span>
+              <span class="line line3"></span>
+          </div>
+          <ul class="menu-items">
+              <li><a href="login.php">Profil</a></li>
+              <li><a href="boutique.php">Boutique</a></li>
+              <li><a href="inventaire.php">Inventaire</a></li>
+              <li><a href="enigma.php">Enigma</a></li>
+              <li><a href="panoramix.php">Panoramix</a></li>
+              <li><a href="panier.php">Panier</a></li>
+          </ul>
+          <h1 class="logo">$pageTitle</h1>
+      </div>
+    </nav>
     HTML;

@@ -17,7 +17,7 @@
                 <div id="header">
                     $header
                 </div>
-                <div id="content">
+                <div style="padding-top: 120px">
                     $content
                 </div>
             </div>

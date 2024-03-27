@@ -10,7 +10,6 @@ $ImageFolder = "data/img/";
 $content = '<div class="content"><div class="itemContainer">';
 //Ajouter les filtres et tri
 
-
 foreach($allItems as $oneItem){
     $id = $oneItem->idItem;
     $nom = $oneItem->nom;
@@ -20,6 +19,7 @@ foreach($allItems as $oneItem){
     $photo = $oneItem->photo;
 
     if($quantite > 0){
+      $inputId = "quantite_$id";
       $ItemHTML = <<<HTML
         <div class="itemLayout">
             <div class="shopItemLeft">
@@ -34,8 +34,8 @@ foreach($allItems as $oneItem){
             </div>
             <div class="shopItemRight">
                 <div class="prix">Prix unitaire: $prix </div>
-                <input type="number" id="quantite" name="quantite" min="1" value="1" class="quantite">
-                <input type="button" value="Ajouter au panier" class="bouton" onclick="">
+                <input type="number" id="$inputId" name="$inputId" min="1" value="1" class="quantite">
+                <input type="button" value="Ajouter au panier" class="bouton" onclick="addToBasket($id)">
             </div>
 
         </div>
@@ -49,3 +49,10 @@ $content .= '</div></div>';
 
 include "views/master.php";
 ?>
+<script>
+    function addToBasket(itemId) {
+    var quantityInput = document.getElementById("quantite_" + itemId);
+    var quantity = quantityInput.value;
+    window.location.href = "addToBasket.php?itemId=" + itemId + "&quantity=" + quantity;
+}
+</script>

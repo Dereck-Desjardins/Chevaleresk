@@ -78,7 +78,7 @@
 
     $content .= <<<HTML
             </div>
-            <a href="" class="retour">Retour</a>
+            <input type="button" value="Retour" class="bouton" onclick="">
         </div>
     </div>
     HTML;

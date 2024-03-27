@@ -9,7 +9,7 @@ try {
         $joueur = new Joueurs($_POST["Email"],$_POST["MDP"]);
         $_SESSION["currentPlayer"] = $joueur;
     }
-    header('Location: mainMenu.php');
+    header('Location: boutique.php');
 
 } catch (Exception $e) {
     //redirige l'utilisateur vers la page de connexion avec message d'erreur

@@ -95,6 +95,13 @@ class DB
             exit();
         }
     }
+    public static function getItemById($id) {
+        $mybd = self::Connection();
+        $sql = $mybd->prepare("SELECT * FROM Items WHERE idItem = :id");
+        $sql->bindParam(':id', $id, PDO::PARAM_INT);
+        $sql->execute();
+        return $sql->fetch(PDO::FETCH_OBJ);
+    }
     public static function getAllItems() {
         $mybd = self::Connection();
         $sql = $mybd->prepare("SELECT * FROM Items");

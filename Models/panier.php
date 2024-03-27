@@ -1,34 +1,41 @@
 <?php
 
-class Panier{
-    public $Items;
+class Panier
+{
+    public $items; 
 
-  public function AddLine(Line $line){
-    $id = $line->IdItem;
-    if(!$this->findObjectById($id)){
-        array_push($this->Items,$line); 
+    public function __construct()
+    {
+        $this->items = array();
     }
-    else {
-        $qt = $line->QtItem;
-        $this->Items;
 
+    public function ajouterItem(Item $item, $quantity)
+    {
+        
+        $this->items[$item->Id] = $quantity;
+        
     }
-  }
-function findObjectById($id){
-    $array = $this->Items;
-    if ( isset( $array[$id] ) ) {
-        return $array[$id];
+
+    public function retirerItem($itemId)
+    {
+        if (isset($this->items[$itemId])) {
+            unset($this->items[$itemId]);
+        }
     }
-    return false;
-}
-}
 
-class Line{
-    public $IdItem;
-    public $QtItem;
+    public function viderPanier()
+    {
+        $this->items = array();
+    }
 
-    public function setNewItem($id,$qt){
-        $this->IdItem=$id;
-        $this->QtItem = $qt;
+    public function getItems()
+    {
+        return $this->items;
+    }
+    public function changerQuantiteItem($itemId, $newQuantity)
+    {
+        if (isset($this->items[$itemId])) {
+            $this->items[$itemId] = $newQuantity;
+        }
     }
 }
