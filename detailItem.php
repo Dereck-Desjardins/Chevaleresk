@@ -36,7 +36,7 @@
     
     $content = <<<HTML
     <div class="content">
-        <div class="content2">
+        <div class="detailContainer">
         <div class="photoItem">
             <img src="$ImageFolder" alt="" class="photo">
         </div>
@@ -78,7 +78,7 @@
 
     $content .= <<<HTML
             </div>
-            <input type="button" value="Retour" class="bouton" onclick="">
+            <input type="button" value="Retour" class="bouton retour" onclick="">
         </div>
     </div>
     HTML;
