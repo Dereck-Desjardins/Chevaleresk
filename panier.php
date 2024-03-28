@@ -29,14 +29,16 @@ foreach ($_SESSION["currentPlayer"]->Panier->items as $itemId => $quantity) {
         $ItemHTML = <<<HTML
         <div class="itemLayout">
             <div class="shopItemLeft">
-                <img src="$ImageFolder$photo" alt="" class="photoItemShop">
+                <a href="detailItem.php?id=$id&lastPage=3">
+                    <img src="$ImageFolder$photo" alt="" class="photoItemShop">
+                </a>    
             </div>
             <div class="shopItemMiddle">
                 <div class="nomItem">$nom</div>
                 <div class="typeItem">$typeItem</div>
             </div>
             <div class="shopItemRight">
-                <div class="prix">Prix unitaire: $prix</div>
+                <div class="prix">Prix unitaire: $prix Ecus</div>
                 <div class="quantite">Quantité: <input type="number" id="$inputId" name="$inputId" min="1" value="$quantity" class="quantite" data-item-id="$id"></div>
                 <div class="subtotal">Sous-total: $subtotal</div>
             </div>
