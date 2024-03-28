@@ -4,6 +4,12 @@ include_once 'Models/items.php';
 include_once 'php/sessionManager.php';
 include_once 'MySql/db_connection.php';
 
+
+if (!isset($_SESSION['currentPlayer'])) {
+
+    header('Location: login.php?message=1');
+}
+else{
 $ImageFolder = "data/img/";
 
 $content = '<div class="content"><div class="itemContainer">';
@@ -37,7 +43,7 @@ foreach ($_SESSION["currentPlayer"]->Panier->items as $itemId => $quantity) {
             </div>
             <div class="shopItemRight">
                 <div class="prix">Prix unitaire: $prix</div>
-                <div class="quantite">Quantité: <input type="number" id="$inputId" name="$inputId" min="1" value="$quantity" class="quantite" data-item-id="$id"></div>
+                <div class="quantite">Quantité: <input type="number" id="$inputId" name="$inputId" min="1" value="$quantity" class="quantite" onclick="handleQuantityChange(this.value ,$id)"></div>
                 <div class="subtotal">Sous-total: $subtotal</div>
             </div>
         </div>
@@ -46,28 +52,28 @@ foreach ($_SESSION["currentPlayer"]->Panier->items as $itemId => $quantity) {
         $content .= $ItemHTML;
     }
 }
+$actionBarHtml = <<<HTML
+    <div class="total">Total: $totalPrice</div>
 
-$content .= '<div class="total">Total: ' . $totalPrice . '</div>';
+    <button class="bouton" onclick="handleBuyCart()">Payer</button>
 
-$content .= '<button class="bouton">Payer</button>';
-
-$content .= '<button class="bouton">Vider le panier</button>';
-
-
+    <button class="bouton" onclick="handleEmptyCart()">Vider le panier</button>
+HTML;
+$content .= $actionBarHtml;
 $content .= '</div></div>';
+}
 include "views/master.php";
 ?>
 <script>
-    function handleQuantityChange(itemId, newQuantity) {
+    function handleQuantityChange(newQuantity, itemId) {
+        window.location.href = "updateQuantity.php?itemId=" + itemId + "&newQuantity=" + newQuantity;
     }
-   var quantityInputs = document.querySelectorAll('.quantite');
-    quantityInputs.forEach(function(input) {
-        input.addEventListener('change', function() {
-            var itemId = this.getAttribute('data-item-id');
-            var newQuantity = this.value;
-            handleQuantityChange(itemId, newQuantity);
-        });
-    });
+    function handleEmptyCart() {
+        window.location.href = "emptyCart.php";
+    }
+    function handleBuyCart() {
+        window.location.href = "buyCart.php";
+    }
 </script>
 
 

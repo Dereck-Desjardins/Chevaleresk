@@ -4,7 +4,7 @@
     width: 60%;
     align-self: center;
     height: auto; 
-    padding:3% 5% 3% 5%;
+    padding:1% 5% 1% 5%;
     flex-direction: column;
     
     margin: auto;
@@ -17,6 +17,7 @@
 .name{
     text-align: center;
     border-style: solid;
+    font-size: 2em;
 
 }
 .description{
@@ -30,8 +31,26 @@
     width: auto;
 }
 .retour{
-    padding-top: 3%;
-    font-size: 2em;
-    text-align: center;
-    padding-bottom: 3% ; 
+    font-size: 1.5em;
+    margin: auto;
+    background-color: #117964;
+    color: white;
+    border: none;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+}
+.retour:hover {
+    background-color: #0f5e4e; 
+    color: white;
+}
+.caracteristique{
+    display: flex;
+    align-items: center;
+}
+.caracteristiqueType{
+    font-size: 1.7em;
+    padding-right: 10px;
+}
+.caracteristiqueValue{
+    font-size: 1.1em;
 }

@@ -18,12 +18,26 @@ foreach($allItems as $oneItem){
     $prix = $oneItem->prix;
     $photo = $oneItem->photo;
 
+    if($typeItem == "R"){
+        $typeItem = "Armure";
+    }
+    elseif($typeItem == "A"){
+        $typeItem = "Arme";
+    }    
+    elseif($typeItem == "P"){
+        $typeItem = "Potion";
+    }
+    elseif($typeItem == "E"){
+        $typeItem = "Element";
+    }
+
+
     if($quantite > 0){
       $inputId = "quantite_$id";
       $ItemHTML = <<<HTML
         <div class="itemLayout">
             <div class="shopItemLeft">
-                <a href="detailItem.php?id=$id">
+                <a href="detailItem.php?id=$id&lastPage=1">
                     <img src="$ImageFolder$photo" alt="" class="photoItemShop">
                 </a>    
             </div>
@@ -33,7 +47,7 @@ foreach($allItems as $oneItem){
                 <div class="typeItem">$typeItem</div>
             </div>
             <div class="shopItemRight">
-                <div class="prix">Prix unitaire: $prix </div>
+                <div class="prix">Prix unitaire: $prix Ecus</div>
                 <input type="number" id="$inputId" name="$inputId" min="1" value="1" class="quantite">
                 <input type="button" value="Ajouter au panier" class="bouton" onclick="addToBasket($id)">
             </div>
