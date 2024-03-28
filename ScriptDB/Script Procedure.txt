@@ -10,7 +10,6 @@ drop procedure if exists rechercherItem;
 drop procedure if exists avoirInventaireJ;
 
 drop trigger if exists CTRLInsertItems;
-drop trigger if exists CTRL_InsertItemsINV;
 
 
 delimiter |
@@ -144,11 +143,10 @@ in pCourriel varchar(45)
 )
 begin
 start transaction ;
-insert into joueurs (alias,nom,prenom,niveau,estAdmin,motdepasse,courriel)
+insert into Joueurs (alias,nom,prenom,niveau,estAdmin,motdepasse,courriel)
 values (pAlias,pnom,pPrenom,pNiveau,pEstAdmin,pmotDePasse,pCourriel);
 commit;
 end |
-
 
 delimiter |
 create procedure ajouterItemInv(
@@ -157,30 +155,41 @@ in pidJ int,
 in pQt int
 )
 begin
+   DECLARE itemExists INT;
+	DECLARE	soldeJ INT;
+    DECLARE	prixItem INT;
+    DECLARE qtItem int;
+	-- Vérifier si l'objet existe déjà dans l'inventaire du joueur
+    SELECT COUNT(*) INTO itemExists FROM Inventaires WHERE dItem = pidItem AND idJoueur = pidJ;
+    -- Prends le solde du joueur
+    SELECT solde INTO soldeJ FROM Joueurs WHERE idJoueur = pidJ;
+    -- Prends le prix de l'item
+    SELECT 	prix INTO prixItem FROM Items WHERE idItem = pidItem;
+    -- Prends la quantité de l'item
+    SELECT quantiteStock INTO qtItem FROM Items WHERE idItem = pidItem;
+    
 start transaction ;
-insert Inventaires values (pidItem,pidJ,pQt);
+-- Verifi le solde du joueur avant l'Achat
+IF soldeJ >= pQt * prixItem then
+   -- Verifi si la quantité est bonne avant l'achat
+	IF qtItem >= pQt then
+	  -- Si l'objet existe déjà, mettre à jour la quantité
+		IF itemExists > 0
+		THEN UPDATE Inventaires SET quantiteInventaire = quantiteInventaire + pQt WHERE dItem = pidItem AND idJoueur = pidJ;
+		else
+		-- Ajout du nouvel item
+			insert Inventaires values (pidItem,pidJ,pQt);
+		end if;
+		-- Reduit le solde
+		UPDATE Joueurs SET solde = solde - pQt * prixItem WHERE idJoueur = pidJ;
+        -- Reduit la quantité 
+        UPDATE Items SET quantiteStock = quantiteStock - pQt WHERE idItem = pidItem;
+        -- Rends l'item indisponible 
+        UPDATE Items SET flagDispo = 0 WHERE idItem = pidItem;
+     end if;
+ end if;
 commit;
 end |
-DELIMITER //
-
-CREATE TRIGGER CTRL_InsertItemsINV
-BEFORE INSERT ON Inventaires
-FOR EACH ROW
-BEGIN
-    DECLARE itemExists INT;
-
-    -- Vérifier si l'objet existe déjà dans l'inventaire du joueur
-    SELECT COUNT(*) INTO itemExists FROM Inventaires WHERE dItem = NEW.dItem AND idJoueur = NEW.idJoueur;
-
-    -- Si l'objet existe déjà, mettre à jour la quantité
-    IF itemExists > 0 THEN
-        UPDATE Inventaires SET quantiteInventaire = quantiteInventaire + NEW.quantiteInventaire WHERE dItem = NEW.dItem AND idJoueur = NEW.idJoueur;
-        -- Annuler l'insertion de la nouvelle ligne
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Objet déjà présent dans l\'inventaire, la quantité a été mise à jour.';
-    END IF;
-END //
-
-DELIMITER ;
 
 DELIMITER |
 
@@ -188,16 +197,16 @@ CREATE PROCEDURE rechercherItem(
     IN pid INT
 )
 BEGIN
-DECLARE pTypeItem int ;
- SELECT typeItem INTO pTypeItem FROM Items WHERE idItem = pid;
+DECLARE pTypeItem Char(1) ;
+ SELECT typeItem INTO pTypeItem FROM Items WHERE idItem =pid;
     IF pTypeItem = 'R' THEN
-        SELECT taille, matiere FROM Armures WHERE idItem = pid INTO @taille, @matiere;
+        SELECT taille, matiere, nom,quantiteStock,prix,photo,typeItem,flagDispo FROM Armures INNER JOIN Items On Armures.idItem =Items.idItem WHERE Items.idItem = pid ;
     ELSEIF pTypeItem = 'A' THEN
-        SELECT description, efficacite, genre FROM Armes WHERE idItem = pid INTO @description, @efficacite, @genre;
+        SELECT description, efficacite, genre, nom,quantiteStock,prix,photo,typeItem,flagDispo FROM Armes INNER JOIN Items On Armes.idItem=Items.idItem WHERE Items.idItem = pid ;
     ELSEIF pTypeItem = 'P' THEN
-        SELECT duree, effet, TypePotion FROM Potions WHERE idItem = pid INTO @duree, @effet, @TypePotion;
+        SELECT duree, effet, TypePotion, nom,quantiteStock,prix,photo,typeItem,flagDispo FROM Potions INNER JOIN Items On Potions.idItem=Items.idItem WHERE Items.idItem = pid;
     ELSEIF pTypeItem = 'E' THEN
-        SELECT Rarete, dangerosite FROM Elements WHERE idItem = pid INTO @Rarete, @dangerosite;
+        SELECT Rarete, dangerosite, nom,quantiteStock,prix,photo,typeItem,flagDispo FROM Elements INNER JOIN Items On Elements.idItem=Items.idItem WHERE Items.idItem = pid ;
     END IF;
 END |
 
