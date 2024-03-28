@@ -99,3 +99,7 @@ z-index: 9;
 .inputbox input:focus ~i {
 height: 44px;
 }
+.erreur{
+    color: red;
+    padding-bottom: 15%;    
+}

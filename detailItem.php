@@ -24,13 +24,41 @@
         $genre = $Item[0]->genre;
     }
     elseif($typeItem == "P"){
-        $duree = $Item[0]->duree;
+        $duree = $Item[0]->duree." Minutes";
         $effet = $Item[0]->effet;
         $typePotion =$Item[0]->typePotion;
+        if($typePotion == "A"){
+            $typePotion = "Attaque";
+        }
+        elseif($typePotion == "D"){
+            $typePotion = "Defense";
+        }
     }
     elseif($typeItem == "E"){
         $rarete = $Item[0]->rarete;
         $dangerosite = $Item[0]->dangerosite;
+        if($rarete == "1"){
+            $rarete = "Commun";
+        }
+        elseif($rarete == "2"){
+            $rarete = "Peu Commun";
+        }
+        elseif($rarete == "3"){
+            $rarete = "Rare";
+        }
+        elseif($rarete == "4"){
+            $rarete = "Mythique";
+        }
+
+        if($dangerosite == "1"){
+            $dangerosite = "Faible";
+        }
+        elseif($dangerosite == "2"){
+            $dangerosite = "Moyenne";
+        }
+        elseif($dangerosite == "3"){
+            $dangerosite = "Elevee";
+        }
     }
     
     if($lastPage == 1){
@@ -68,7 +96,7 @@
                 <div class="caracteristiqueValue">$taille</div>
             </div>  
             <div class="caracteristique">
-                <div class="caracteristiqueType">Matiere: </div>
+                <div class="caracteristiqueType">Matière: </div>
                 <div class="caracteristiqueValue">$matiere</div>
             </div>   
         HTML;
@@ -81,7 +109,7 @@
                 <div class="caracteristiqueValue">$description</div>
             </div>
             <div class="caracteristique">
-                <div class="caracteristiqueType">Efficacite: </div>
+                <div class="caracteristiqueType">Efficacité: </div>
                 <div class="caracteristiqueValue">$efficacite</div>
             </div>  
             <div class="caracteristique">
@@ -94,7 +122,7 @@
         //Duree, Effet, Typepotion
         $content .= <<<HTML
             <div class="caracteristique">
-                <div class="caracteristiqueType">Duree: </div>
+                <div class="caracteristiqueType">Durée: </div>
                 <div class="caracteristiqueValue">$duree</div>
             </div>
             <div class="caracteristique">
@@ -111,11 +139,11 @@
         //rarete, dangerosite
         $content .= <<<HTML
             <div class="caracteristique">
-                <div class="caracteristiqueType">Rarete: </div>
+                <div class="caracteristiqueType">Rareté: </div>
                 <div class="caracteristiqueValue">$rarete</div>
             </div>  
             <div class="caracteristique">
-                <div class="caracteristiqueType">Dangerosite: </div>
+                <div class="caracteristiqueType">Dangerosité: </div>
                 <div class="caracteristiqueValue">$dangerosite</div>
             </div>   
         HTML;        

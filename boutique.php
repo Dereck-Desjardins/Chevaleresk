@@ -18,6 +18,20 @@ foreach($allItems as $oneItem){
     $prix = $oneItem->prix;
     $photo = $oneItem->photo;
 
+    if($typeItem == "R"){
+        $typeItem = "Armure";
+    }
+    elseif($typeItem == "A"){
+        $typeItem = "Arme";
+    }    
+    elseif($typeItem == "P"){
+        $typeItem = "Potion";
+    }
+    elseif($typeItem == "E"){
+        $typeItem = "Element";
+    }
+
+
     if($quantite > 0){
       $inputId = "quantite_$id";
       $ItemHTML = <<<HTML

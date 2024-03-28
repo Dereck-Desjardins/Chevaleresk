@@ -1,6 +1,6 @@
 <?php
     $content = <<<HTML
-        <div class="content">
+        
         <div id="main">
             <div id="title" class="title">
             <h1>Inventaire</h1>
@@ -29,7 +29,7 @@
             </div>
         </div>
         </div>
-        </div>
+       
     HTML;
     include "views/master.php";
 ?>
@@ -48,6 +48,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 250;
+  margin: auto;
 }
 
 .content2 {
