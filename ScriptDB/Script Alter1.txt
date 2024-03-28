@@ -10,3 +10,6 @@ alter TABLE Enigmes ADD CONSTRAINT CHK_difficulte CHECK (Difficulte in ('d','m',
 alter TABLE Potions ADD CONSTRAINT CHK_typePotions CHECK (TypePotion in ('A','D'));
 alter TABLE Statistiques ADD CONSTRAINT CHK_stat CHECK (estReussie in (1,0));
 ALTER TABLE Items MODIFY COLUMN flagDispo CHAR(1) NOT NULL DEFAULT '1', ADD CONSTRAINT CHK_dispo CHECK (flagDispo IN ('0', '1'));
+ALTER TABLE Armures MODIFY COLUMN taille VARCHAR(20);
+
+SELECT * FROM Joueurs;

@@ -31,6 +31,24 @@ class DB
             exit();
         }
     }
+    public static function UpdateJoueur($idJoueur,$alias, $nom, $prenom, $mp, $courriel)
+    {
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL ajouterJoueurs(?, ?, ?, ?, ?, ?)");
+            $sql->bindParam(1, $idJoueur);
+            $sql->bindParam(2, $alias);
+            $sql->bindParam(3, $nom);
+            $sql->bindParam(4, $prenom);
+            $sql->bindParam(5, $mp);
+            $sql->bindParam(6, $courriel);
+            $sql->execute();
+            return "Le Joueur a été modifié avec succès.";
+        } catch (PDOException $e) {
+            echo 'Erreur modification: ' . $e->getMessage();
+            exit();
+        }
+    }
     public static function InsertArme($nom, $qt, $prix, $photo, $description, $efficacite, $genre)
     {
         try {
@@ -65,21 +83,18 @@ class DB
             exit();
         }
     }
-    public static function FIndItemInv($idItem,$idJoueur,$Qt)
+    public static function GetInventaire($idJoueur)
     {
         try {
             $mybd = self::Connection();
-            $sql = $mybd->prepare("CALL ajouterItemInv(?, ?, ?)");
-            $sql->bindParam(1, $idItem);
-            $sql->bindParam(2, $idJoueur);
-            $sql->bindParam(3, $Qt);
+            $sql = $mybd->prepare("CALL avoirInventaireJ(?)");
+            $sql->bindParam(1, $idJoueur);
             $sql->execute();
-            return "Item insérée dans l'inventaire avec succès.";
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo 'Erreur insertion: ' . $e->getMessage();
             exit();
         }
-
     }
 
     public static function TrouverJoueur($courriel,$mp)

@@ -8,6 +8,8 @@ drop procedure if exists ajouterJoueurs;
 drop procedure if exists ajouterItemInv;
 drop procedure if exists rechercherItem;
 drop procedure if exists avoirInventaireJ;
+drop procedure if exists modiferProfil;
+
 
 drop trigger if exists CTRLInsertItems;
 
@@ -80,7 +82,7 @@ in pNom varchar(50),
 in pQuantite int,
 in pPrix int,
 in pPhoto varchar(100),
-in ptaille int,
+in ptaille varchar(20),
 in pmatiere varchar(45))
 begin
 declare pTypeItem char(1) default 'R';
@@ -204,9 +206,9 @@ DECLARE pTypeItem Char(1) ;
     ELSEIF pTypeItem = 'A' THEN
         SELECT description, efficacite, genre, nom,quantiteStock,prix,photo,typeItem,flagDispo FROM Armes INNER JOIN Items On Armes.idItem=Items.idItem WHERE Items.idItem = pid ;
     ELSEIF pTypeItem = 'P' THEN
-        SELECT duree, effet, TypePotion, nom,quantiteStock,prix,photo,typeItem,flagDispo FROM Potions INNER JOIN Items On Potions.idItem=Items.idItem WHERE Items.idItem = pid;
+        SELECT duree, effet, typePotion, nom,quantiteStock,prix,photo,typeItem,flagDispo FROM Potions INNER JOIN Items On Potions.idItem=Items.idItem WHERE Items.idItem = pid;
     ELSEIF pTypeItem = 'E' THEN
-        SELECT Rarete, dangerosite, nom,quantiteStock,prix,photo,typeItem,flagDispo FROM Elements INNER JOIN Items On Elements.idItem=Items.idItem WHERE Items.idItem = pid ;
+        SELECT rarete, dangerosite, nom,quantiteStock,prix,photo,typeItem,flagDispo FROM Elements INNER JOIN Items On Elements.idItem=Items.idItem WHERE Items.idItem = pid ;
     END IF;
 END |
 
@@ -222,3 +224,19 @@ BEGIN
 END |
 
 DELIMITER ;
+
+DELIMITER |
+CREATE PROCEDURE modiferProfil(
+in pidJ INT,
+ in palias VARCHAR(50),
+ in pnom VARCHAR(50),
+ in pprenom VARCHAR(50),
+ in pmp VARCHAR(50),
+ in pcourriel VARCHAR(50)
+)
+BEGIN
+	START TRANSACTION;
+		UPDATE Joueurs SET alias = palias, nom = pnom, prenom = pprenom, motdepasse = pmp, courriel = pcourriel 
+        WHERE idJoueur = pidJ;
+    COMMIT;
+END |
