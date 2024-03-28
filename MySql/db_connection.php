@@ -122,7 +122,6 @@ class DB
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
-
     //Un Select Général pour l'instant 
     public static function Select($columns, $table, $where = '')
     {
