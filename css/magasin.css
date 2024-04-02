@@ -58,3 +58,32 @@
 .bouton:hover {
     background-color: #0f5e4e; 
 }
+a {
+  text-decoration: none;
+}
+.category-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.category-nav ul {
+  display: flex;
+  list-style: none;
+}
+
+.category-nav ul li {
+  margin: 0 1rem;
+}
+
+.category-nav ul li a {
+  padding: 0.5rem 1rem;
+  border: 1px solid #2c3e50;
+  color: #000;
+  border-radius: 5px;
+  text-decoration: none;
+}
+.category-nav ul li a:hover {
+    color: #117964;
+    transition: color 0.3s ease-in-out;
+  }
