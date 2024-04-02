@@ -1,0 +1,116 @@
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5em;
+}
+
+.contentInventaire {
+  margin: auto;
+  border-style: solid;
+  border-color: black;
+  width: 80%;
+}
+.menuInventaire{
+    display:flex;
+    margin: 1%;
+    flex-wrap: wrap;
+}
+.menuTop{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+    padding-bottom: 1%;
+}
+.menuBottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin: auto;
+}
+
+.select-container {
+  margin-right: 20px;
+  height: auto;
+  width: 300px;
+}
+
+.input-container {
+  margin-left: 20px;
+  border-style: solid;
+  border-color: lightgray;
+}
+
+.input {
+  width: 200px;
+  height: 40px;
+  border: none;
+  outline: none;
+  caret-color: rgb(255, 81, 0);
+  background-color: rgb(255, 255, 255);
+  border-radius: 30px;
+  padding-left: 15px;
+  letter-spacing: 0.8px;
+  color: rgb(19, 19, 19);
+  font-size: 13.4px;
+}
+.inventaireContainer{
+  width: 1000px;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  display:flex;
+  height:auto;
+  padding: 1%;
+  flex-wrap: wrap;
+  
+}
+.itemInventaire{
+  display: flex;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  height:auto;
+  width: 25%;
+  border-radius: 10px;
+  margin: auto;
+  margin-bottom: 3%;
+  flex-wrap: wrap;
+  padding: 1% 0% 1% 0%;
+}
+.photoInventaire{
+  height: 100%;
+  width: auto;
+  margin:auto;
+}
+.quantiteInventaire{
+  width: 100%;
+  text-align: center;
+  font-size: 1.5em;
+  padding:5px;
+}
+.btnVendre{
+  background-color: #117964;
+  color: white;
+  border: none;
+  padding: 5px;
+  width: 40%;
+  height: 50px;
+  margin: auto;
+}
+.btnVendre:hover{
+  background-color: #0f5e4e; 
+}
+.qttVendre{
+  width: 40%;
+  margin: auto;
+}
+.nomInventaire{
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  padding:5px;
+}

@@ -1,8 +1,11 @@
 <?php
 require 'php/sessionManager.php';
 
-if(isset($_GET['message']) && isset($_GET['message']) == 1){
+if(isset($_GET['message']) && $_GET['message'] == 1){
     $message = "Veuillez vous connecter pour acceder a votre panier!";
+}
+elseif(isset($_GET['message']) && $_GET['message'] == 2){
+    $message = "Veuillez vous connecter pour acceder a votre inventaire!";
 }
 else{
     $message = '';

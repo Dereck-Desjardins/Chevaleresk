@@ -138,4 +138,17 @@ class DB
             exit();
         }
     }
+    public static function GetInventaire($idJoueur)
+    {
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL avoirInventaireJ(?)");
+            $sql->bindParam(1, $idJoueur);
+            $sql->execute();
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo 'Erreur insertion: ' . $e->getMessage();
+            exit();
+        }
+    }
 }
