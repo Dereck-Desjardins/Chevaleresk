@@ -43,7 +43,7 @@ foreach ($_SESSION["currentPlayer"]->Panier->items as $itemId => $quantity) {
             </div>
             <div class="shopItemRight">
                 <div class="prix">Prix unitaire: $prix</div>
-                <div class="quantite">Quantité: <input type="number" id="$inputId" name="$inputId" min="1" value="$quantity" class="quantite" onclick="handleQuantityChange(this.value ,$id)"></div>
+                <div class="quantite">Quantité: <input type="number" id="$inputId" name="$inputId" min="1"  max="$quantite" value="$quantity" class="quantite" onclick="handleQuantityChange(this.value ,$id)"></div>
                 <div class="subtotal">Sous-total: $subtotal</div>
             </div>
         </div>

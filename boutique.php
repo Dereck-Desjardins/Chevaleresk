@@ -62,10 +62,11 @@ foreach($allItems as $oneItem){
                 <div class="shopItemMiddle">
                     <div class="nomItem">$nom</div>
                     <div class="typeItem">$typeItem</div>
+                    <div class="typeItem">Quantité en inventaire : $quantite</div>
                 </div>
                 <div class="shopItemRight">
                     <div class="prix">Prix unitaire: $prix Ecus</div>
-                    <input type="number" id="$inputId" name="$inputId" min="1" value="1" class="quantite">
+                    <input type="number" id="$inputId" name="$inputId" min="1" max="$quantite" value="1" class="quantite">
                     <input type="button" value="Ajouter au panier" class="bouton" onclick="addToBasket($id)">
                 </div>
             </div>

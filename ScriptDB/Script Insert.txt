@@ -1,12 +1,30 @@
-use dbchevalersk6;
+Use dbchevalersk6 ;
+/*insert arme */
+CALL ajouterArme('Hache', 5, 200, 'Axe.png', 'La Hache du Guerrier Intrépide', 'Moyenne', 'Hache');
+CALL ajouterArme('Lame enflammée', 5, 400, 'BurningBlade.png', 'La Lame Ardente du Brasier Éternel', 'Moyenne', 'Épée');
+CALL ajouterArme('Soif de mana', 5, 400, 'Manathirst.png', 'Épée des Arcanes', 'Haute', 'Épée');
+CALL ajouterArme('Poêle', 5, 100, 'Pan.png', 'La Poêle Magique du Chef Farfelu', 'Faible', 'Ustensile de Cuisine');
+CALL ajouterArme('Dague Spectrale', 5, 300, 'SpectralDagger.png', 'La Dague Spectrale des Ombres Éthérées', 'Moyenne', 'Dague');
 
-CALL ajouterArmure('Armure de l''Éclipse', 1, 10000, 'armure_eclipse.jpg', 50, 'Titanium');
-CALL ajouterArmure('Cuirasse du Dragon', 1, 12000, 'cuirasse_dragon.jpg', 55, 'Écailles');
-CALL ajouterArmure('Robe des Étoiles', 1, 15000, 'robe_etoiles.jpg', 40, 'Soie Galactique');
-call ajouterArme('THE KING TROPHY',1,10000,'THEKING.jpg','Forgée dans les flammes de la colère des dieux, la légendaire épée "THE KING TROPHY" incarne la puissance absolue. Avec une lame aussi tranchante que l''aube et une poignée ornée de gemmes rares, cette arme est le symbole ultime de la domination sur le champ de bataille. Portée par les plus grands héros et redoutée par les plus vils des ennemis, "THE KING TROPHY" est bien plus qu''une simple arme - c''est une légende vivante qui défie le temps lui-même.','Destruction totale ','Une main');
 
-CALL ajouterElement('Feu élémentaire', 5, 50, 'feu.jpg', 80, 5);
-CALL ajouterElement('Eau glaciale', 3, 75, 'glace.jpg', 90, 4);
-CALL ajouterElement('Vent impétueux', 2, 60, 'vent.jpg', 70, 6);
-CALL ajouterElement('Terre solide', 4, 40, 'terre.jpg', 85, 3);
+/*insert armure*/
+CALL ajouterArmure('Armure Sacrée', 5, 400, 'HolyArmor.png', 'Grande', 'Acier Sacrée');
+CALL ajouterArmure('Armure en Cuir', 5, 100, 'LeatherArmor.png', 'Petite', 'Cuire de Qualité Médiocre');
+CALL ajouterArmure('Armure Lunaire', 5, 400, 'MoonArmor.png', 'Moyenne', 'Écailles de lune');
+CALL ajouterArmure('Armure en Pierre', 5, 200, 'StoneArmor.png', 'Moyenne', 'Pierre Volcanique');
+CALL ajouterArmure('Armure Solaire', 5, 400, 'SunArmor.png', 'Moyenne', 'Cristal Solaire');
+
+/*insert potion*/
+CALL ajouterPotion('Flasque Démoniaque', 10, 150, 'DemonicFlask.png', 'Force démoniaque', 5, 'A');
+CALL ajouterPotion('Potion Divine', 10, 200, 'DivinePotion.png', 'Bénédiction divine', 5, 'D');
+CALL ajouterPotion('Potion de Mana', 10, 100, 'ManaPotion.png', 'Régénération de mana', 5, 'D');
+CALL ajouterPotion('Potion de Peau de Pierre', 10, 100, 'StoneSkinPotion.png', 'Réduction des dégâts', 5, 'D');
+CALL ajouterPotion('Potion Divine Puissante', 10, 250, 'StrongDivinePotion.png', 'Force des anges', 5, 'D');
+
+/*insert elements*/
+CALL ajouterElement('Banane', 20, 30, 'Banana.png', 1, 1);
+CALL ajouterElement('Bleuet', 20, 25, 'Blueberries.png', 2, 1);
+CALL ajouterElement('Champignon', 20, 50, 'Mushroom.png', 3, 3);
+CALL ajouterElement('Ail', 20, 40, 'Garlic.png', 2, 2);
+CALL ajouterElement('Ananas', 20, 35, 'Pineapple.png', 4, 1);
 
