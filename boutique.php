@@ -25,16 +25,16 @@ HTML;
 
 $content .= $categoryHtml;
 
-foreach($allItems as $oneItem){
+foreach ($allItems as $oneItem) {
     $id = $oneItem->idItem;
     $nom = $oneItem->nom;
-    $quantite = $oneItem->quantiteStock; 
+    $quantite = $oneItem->quantiteStock;
     $typeItem = $oneItem->typeItem;
     $prix = $oneItem->prix;
     $photo = $oneItem->photo;
 
-    if($category === null || $typeItem === $category){
-        switch($typeItem) {
+    if ($category === null || $typeItem === $category) {
+        switch ($typeItem) {
             case "R":
                 $typeItem = "Armure";
                 break;
@@ -49,9 +49,9 @@ foreach($allItems as $oneItem){
                 break;
         }
 
-        if($quantite > 0){
-          $inputId = "quantite_$id";
-          $ItemHTML = <<<HTML
+        if ($quantite > 0) {
+            $inputId = "quantite_$id";
+            $ItemHTML = <<<HTML
             <div class="itemLayout">
                 <div class="shopItemLeft">
                     <a href="detailItem.php?id=$id&lastPage=1">
@@ -66,22 +66,25 @@ foreach($allItems as $oneItem){
                 </div>
                 <div class="shopItemRight">
                     <div class="prix">Prix unitaire: $prix Ecus</div>
-                    <input type="number" id="$inputId" name="$inputId" min="1" max="$quantite" value="1" class="quantite">
+                    <input type="number"  id="$inputId" name="$inputId" min="1" max="$quantite" value="1" class="quantite" onkeydown="return false;">
                     <input type="button" value="Ajouter au panier" class="bouton" onclick="addToBasket($id)">
                 </div>
             </div>
           HTML;
 
-          $content .= $ItemHTML;
+            $content .= $ItemHTML;
         }
     }
-}           
+}
 
 $content .= '</div></div>';
 
 include "views/master.php";
 ?>
 <script>
+$("[type='number']").keypress(function (evt) {
+    evt.preventDefault();
+});
     function addToBasket(itemId) {
         var quantityInput = document.getElementById("quantite_" + itemId);
         var quantity = quantityInput.value;
