@@ -44,6 +44,7 @@ else{
                 </div>
                 
             </div>
+            <div class="inventaireContainer">
         HTML;
         foreach($allItemsInv as $oneItemInv){
         $id = $oneItemInv["dItem"];
@@ -70,7 +71,7 @@ else{
         }
     }           
 
-    $content .= '</div></div>';
+    $content .= '</div></div></div>';
 
 }
 include "views/master.php";

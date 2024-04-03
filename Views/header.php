@@ -17,7 +17,7 @@
               <li><a href="enigma.php">Enigma</a></li>
               <li><a href="panoramix.php">Panoramix</a></li>
               <li><a href="panier.php">Panier</a></li>
-              <li>$money</li>
+              
           </ul>
           <h1 class="logo">$pageTitle</h1>
       </div>
