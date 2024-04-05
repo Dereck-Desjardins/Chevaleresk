@@ -10,7 +10,7 @@ class Joueurs
     public $Solde;
     public $Niveau;
     public $EstAdmin;
-    private $MotDePasse;
+    public $MotDePasse;
 
     public $Courriel;
 
@@ -32,6 +32,7 @@ class Joueurs
             $this->Niveau = $result[0]['niveau'];
             $this->EstAdmin = $result[0]['estAdmin'];
             $this->Solde = $result[0]['solde'];
+            $this->MotDePasse = $result[0]['motdepasse'];
         } else {
             throw new Exception('');
         }

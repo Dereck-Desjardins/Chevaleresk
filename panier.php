@@ -14,7 +14,13 @@ if (!isset($_SESSION['currentPlayer'])) {
 
     $content = '<div class="content"><div class="itemContainer">';
     $totalPrice = 0;
-
+    if(count($_SESSION["currentPlayer"]->Panier->items) == 0){
+        $content.= <<<HTML
+            <div class="panierVide">Votre panier est actuellement vide</div>
+        HTML;
+    }
+    else{
+    
     foreach ($_SESSION["currentPlayer"]->Panier->items as $itemId => $quantity) {
         $oneItem = DB::getItemById($itemId);
        
@@ -51,9 +57,9 @@ if (!isset($_SESSION['currentPlayer'])) {
 
             $ItemHTML = <<<HTML
         <div class="itemLayout">
-            <div class="shopItemLeft">
+            <a href="detailItem.php?id=$id&lastPage=3" class="shopItemLeft">
                 <img src="$ImageFolder$photo" alt="" class="photoItemShop">
-            </div>
+            </a>
             <div class="shopItemMiddle">
                 <div class="nomItem">$nom</div>
                 <div class="typeItem">$typeItem</div>
@@ -80,6 +86,7 @@ if (!isset($_SESSION['currentPlayer'])) {
 HTML;
     $content .= $actionBarHtml;
     $content .= '</div></div>';
+}
 }
 include "views/master.php";
 ?>

@@ -6,7 +6,10 @@ include 'MySql/db_connection.php';
 $ImageFolder = "data/img/";
 
 $allItems = DB::getAllItems();
-
+$connecter = true;
+if (!isset($_SESSION['currentPlayer'])) {
+   $connecter = false;
+}
 $category = isset($_GET['category']) ? $_GET['category'] : null;
 
 $content = '<div class="content"><div class="itemContainer">';
@@ -67,7 +70,7 @@ foreach ($allItems as $oneItem) {
                 <div class="shopItemRight">
                     <div class="prix">Prix unitaire: $prix Ecus</div>
                     <input type="number"  id="$inputId" name="$inputId" min="1" max="$quantite" value="1" class="quantite" onkeydown="return false;">
-                    <input type="button" value="Ajouter au panier" class="bouton" onclick="addToBasket($id)">
+                    <input type="button" value="Ajouter au panier" class="bouton" onclick="addToBasket($id,$connecter)">
                 </div>
             </div>
           HTML;
@@ -82,12 +85,16 @@ $content .= '</div></div>';
 include "views/master.php";
 ?>
 <script>
-$("[type='number']").keypress(function (evt) {
-    evt.preventDefault();
-});
-    function addToBasket(itemId) {
-        var quantityInput = document.getElementById("quantite_" + itemId);
-        var quantity = quantityInput.value;
-        window.location.href = "addToBasket.php?itemId=" + itemId + "&quantity=" + quantity;
+    $("[type='number']").keypress(function (evt) {
+        evt.preventDefault();
+    });
+    function addToBasket(itemId,connecter) {    
+        if(connecter)   {
+           var quantityInput = document.getElementById("quantite_" + itemId);
+            var quantity = quantityInput.value;
+            window.location.href = "addToBasket.php?itemId=" + itemId + "&quantity=" + quantity;  
+        } else{
+            window.location.href =' login.php?message=3';
+        }
     }
 </script>

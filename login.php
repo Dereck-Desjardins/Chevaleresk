@@ -7,6 +7,9 @@ if(isset($_GET['message']) && $_GET['message'] == 1){
 elseif(isset($_GET['message']) && $_GET['message'] == 2){
     $message = "Veuillez vous connecter pour acceder a votre inventaire!";
 }
+elseif(isset($_GET['message']) && $_GET['message'] == 3){
+    $message = "Veuillez vous connecter pour ajouter des objets dans votre panier!";
+}
 else{
     $message = '';
 }

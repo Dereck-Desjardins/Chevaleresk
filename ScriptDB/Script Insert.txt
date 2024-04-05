@@ -28,3 +28,4 @@ CALL ajouterElement('Champignon', 20, 50, 'Mushroom.png', 3, 3);
 CALL ajouterElement('Ail', 20, 40, 'Garlic.png', 2, 2);
 CALL ajouterElement('Ananas', 20, 35, 'Pineapple.png', 4, 1);
 
+-- CHanger prix

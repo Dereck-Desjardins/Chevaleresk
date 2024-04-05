@@ -27,10 +27,10 @@ class DB
             $sql->execute();
             return "Le Joueur est inséré avec succès.";
         } catch (PDOException $e) {
-            echo 'Erreur insertion: ' . $e->getMessage();
-            exit();
+            throw new AliasException();
         }
     }
+    
     public static function UpdateJoueur($idJoueur,$alias, $nom, $prenom, $mp, $courriel)
     {
         try {
@@ -153,5 +153,20 @@ class DB
             exit();
         }
     }
+    public static function getSolde($idJ)
+    {
+        try {
+            $mybd = self::Connection();
+            $sql = "SELECT solde FROM Joueurs WHERE idjoueur = $idJ";
+            $stmt = $mybd->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            exit();
+        }
+    }
 
 }
+
+class AliasException extends Exception {}
+  

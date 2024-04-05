@@ -5,13 +5,13 @@ include_once 'php/sessionManager.php';
 include_once 'MySql/db_connection.php';
 $Courriel = $_SESSION["Email"];
 $MP = $_SESSION['currentPlayer'] -> MotDePasse;
-$userId = $_SESSION['currentPlayer'];
+$user= $_SESSION['currentPlayer'];
 
-$username = $userId->Alias;
-$firstName = $userId->Prenom;
-$lastName = $userId->Nom;
-$email = $userId->Courriel;
-$solde = $userId->Solde;
+$username = $user->Alias;
+$firstName = $user->Prenom;
+$lastName = $user->Nom;
+$email = $user->Courriel;
+$solde = DB::getSolde($user->Id)[0]['solde'];
 
 $content = <<<HTML
 <div class="itemLayout">

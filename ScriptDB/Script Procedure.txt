@@ -9,8 +9,6 @@ drop procedure if exists ajouterItemInv;
 drop procedure if exists rechercherItem;
 drop procedure if exists avoirInventaireJ;
 drop procedure if exists modiferProfil;
-
-
 drop trigger if exists CTRLInsertItems;
 
 

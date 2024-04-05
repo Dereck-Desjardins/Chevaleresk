@@ -8,6 +8,7 @@
 .shopItemLeft{
     flex: 1;
     margin: auto;
+    text-align: center;
 }
 .shopItemMiddle{
     flex: 3;
@@ -22,7 +23,6 @@
 .photoItemShop{
     height: 200px;
     width: auto;
-
 }
 .nomItem{
     font-size: 1.5em;
