@@ -137,7 +137,19 @@ class DB
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
-    //Un Select Général pour l'instant 
+    public static function getAllRecettes() {
+        $mybd = self::Connection();
+        $sql = $mybd->prepare("SELECT * FROM Recettes");
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_OBJ);
+    }
+    public static function getRecetteById($id) {
+        $mybd = self::Connection();
+        $sql = $mybd->prepare("SELECT * FROM Recettes WHERE Potions_idItem = :id");
+        $sql->bindParam(':id', $id, PDO::PARAM_INT);
+        $sql->execute();
+        return $sql->fetch(PDO::FETCH_OBJ);
+    }
     public static function Select($columns, $table, $where = '')
     {
         try {
