@@ -57,7 +57,7 @@ background: transparent;
 outline: none;
 box-shadow: none;
 border: none;
-color: #23242a;
+color: white;
 font-size: 1em;
 letter-spacing: 0.05em;
 transition: 0.5s;
@@ -76,6 +76,7 @@ pointer-events: none;
 }
 
 .inputbox input:valid ~span,
+.inputbox input:invalid ~span,
 .inputbox input:focus ~span {
 color: #117964;
 transform: translateX(-10px) translateY(-34px);
@@ -96,6 +97,7 @@ z-index: 9;
 }
 
 .inputbox input:valid ~i,
+.inputbox input:invalid ~i,
 .inputbox input:focus ~i {
 height: 44px;
 }

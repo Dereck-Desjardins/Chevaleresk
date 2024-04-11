@@ -6,11 +6,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #2b2d31;
+        background-color: white;
     }
 
     .title {
-        color: #37FF8B;
+        color: #117964;
     }
 
     #main {
@@ -38,7 +38,7 @@
         outline: none;
         box-shadow: none;
         border: none;
-        color: #23242a;
+        color: white;
         font-size: 1em;
         letter-spacing: 0.05em;
         transition: 0.5s;
@@ -51,7 +51,7 @@
         left: 0;
         padding: 20px 10px 10px;
         font-size: 1em;
-        color: #37FF8B;
+        color: #117964;
         letter-spacing: 00.05em;
         transition: 0.5s;
         pointer-events: none;
@@ -59,7 +59,7 @@
 
     .inputbox input:valid~span,
     .inputbox input:focus~span {
-        color: #37FF8B;
+        color: #117964;
         transform: translateX(-10px) translateY(-34px);
         font-size: 0.75em;
     }
@@ -70,7 +70,7 @@
         bottom: 0;
         width: 100%;
         height: 2px;
-        background-color: #37FF8B;
+        background-color: #117964;
         border-radius: 4px;
         transition: 0.5s;
         pointer-events: none;
@@ -90,9 +90,9 @@
 
     .button {
         width: 148px;
-        color: black;
+        color: white;
         border: none;
-        background-color: #37FF8B;
+        background-color: #117964;
         height: 35px;
         border-radius: 5px;
         transition: all ease 0.1s;
@@ -121,8 +121,12 @@
 
 <body>
     <?php
+
+    if(isset($_GET['message']) && $_GET['message'] == 1){
+       echo '<script>alert("Alias déja utilisé")</script>'; 
+    }
     $SignUpError = isset($_SESSION['SignUpError']) ? $_SESSION['SignUpError'] : '';
-    //Pourra affiché l'erreur quand css arrangé :)
+    //Pourra affiché l'erreur quand css arrangé et le body mit dans un $content :)
     ?>
     <div id="main">
         <div id="header">
@@ -130,7 +134,7 @@
         </div>
         <div id="content">
             <form class="form" id="subscribeform" action="confirmSignup.php" method="POST">
-                <label class="avatar" for="file"><span></span></label>
+                <!-- <label class="avatar" for="file"><span></span></label> -->
                 <div class="inputbox">
                     <input class="formControl" name="Alias" required requireMessage="Veuillez entrer votre alias"
                         maxlength="8" type="text">

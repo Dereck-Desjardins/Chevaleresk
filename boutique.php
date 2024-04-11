@@ -1,12 +1,14 @@
 <?php
 include 'php/sessionManager.php';
 include 'php/formUtilities.php';
-include 'MySql/db_connection.php';
-
 $ImageFolder = "data/img/";
 
 $allItems = DB::getAllItems();
+$connecter = true;
 
+if (!isset($_SESSION['currentPlayer'])) {
+    $connecter = false;
+}
 $category = isset($_GET['category']) ? $_GET['category'] : null;
 
 $content = '<div class="content"><div class="itemContainer">';
@@ -25,16 +27,16 @@ HTML;
 
 $content .= $categoryHtml;
 
-foreach($allItems as $oneItem){
+foreach ($allItems as $oneItem) {
     $id = $oneItem->idItem;
     $nom = $oneItem->nom;
-    $quantite = $oneItem->quantiteStock; 
+    $quantite = $oneItem->quantiteStock;
     $typeItem = $oneItem->typeItem;
     $prix = $oneItem->prix;
     $photo = $oneItem->photo;
 
-    if($category === null || $typeItem === $category){
-        switch($typeItem) {
+    if ($category === null || $typeItem === $category) {
+        switch ($typeItem) {
             case "R":
                 $typeItem = "Armure";
                 break;
@@ -49,9 +51,9 @@ foreach($allItems as $oneItem){
                 break;
         }
 
-        if($quantite > 0){
-          $inputId = "quantite_$id";
-          $ItemHTML = <<<HTML
+        if ($quantite > 0) {
+            $inputId = "quantite_$id";
+            $ItemHTML = <<<HTML
             <div class="itemLayout">
                 <div class="shopItemLeft">
                     <a href="detailItem.php?id=$id&lastPage=1">
@@ -64,27 +66,61 @@ foreach($allItems as $oneItem){
                     <div class="typeItem">$typeItem</div>
                     <div class="typeItem">Quantité en inventaire : $quantite</div>
                 </div>
-                <div class="shopItemRight">
-                    <div class="prix">Prix unitaire: $prix Ecus</div>
-                    <input type="number" id="$inputId" name="$inputId" min="1" max="$quantite" value="1" class="quantite">
-                    <input type="button" value="Ajouter au panier" class="bouton" onclick="addToBasket($id)">
-                </div>
-            </div>
-          HTML;
+            HTML;
+            
+            if($typeItem == 'Element' ){
+                if(isset($_SESSION['currentPlayer'])){
+                    if($_SESSION['currentPlayer']->Niveau != 'herboriste'){
+                        $ItemHTML .= <<<HTML
+                            <div class="shopItemRight">
+                                <div class="prix">Prix unitaire: $prix Ecus</div>
+                                <input type="number"  id="$inputId" name="$inputId" min="1" max="$quantite" value="1" class="quantite" onkeydown="return false;">
+                                <input type="button" value="Ajouter au panier" class="bouton" onclick="addToBasket($id,$connecter)">
+                            </div> 
+                        HTML;
+                    }else{
+                        $ItemHTML .= <<<HTML
+                        <div class="shopItemRight">
+                            <div  class="txtNonAlchimiste">Vous n'avez pas le niveau nécessaire pour acheter cet élément.</div>
+                        </div> 
+                    HTML;
+                    }
+                }
+            }
+            else{
+                $ItemHTML .= <<<HTML
+                    <div class="shopItemRight">
+                        <div class="prix">Prix unitaire: $prix Ecus</div>
+                        <input type="number"  id="$inputId" name="$inputId" min="1" max="$quantite" value="1" class="quantite" onkeydown="return false;">
+                        <input type="button" value="Ajouter au panier" class="bouton" onclick="addToBasket($id,$connecter)">
+                    </div> 
+                HTML;
+            }
+            
+            $ItemHTML .= <<<HTML
 
-          $content .= $ItemHTML;
-        }
+</div>
+HTML;
+$content .= $ItemHTML;
+}
     }
-}           
+}
 
 $content .= '</div></div>';
 
 include "views/master.php";
 ?>
 <script>
-    function addToBasket(itemId) {
-        var quantityInput = document.getElementById("quantite_" + itemId);
-        var quantity = quantityInput.value;
-        window.location.href = "addToBasket.php?itemId=" + itemId + "&quantity=" + quantity;
+    $("[type='number']").keypress(function (evt) {
+        evt.preventDefault();
+    });
+    function addToBasket(itemId, connecter) {
+        if (connecter) {
+            var quantityInput = document.getElementById("quantite_" + itemId);
+            var quantity = quantityInput.value;
+            window.location.href = "addToBasket.php?itemId=" + itemId + "&quantity=" + quantity;
+        } else {
+            window.location.href = ' login.php?message=3';
+        }
     }
 </script>

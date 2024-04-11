@@ -1,13 +1,28 @@
 <?php
+    include 'php/sessionManager.php';
+    include 'php/formUtilities.php';
+
+    $idItem = $_GET['id'];
+    $Item = DB::FindDetailsItem($idItem);
+    $nom = $Item[0]->nom;
+    $photo = $Item[0]->photo;
+    $ImageFolder = "data/img/".$photo;
     $content = <<<HTML
+    <div class="content">
+        <div class="detailContainer">
+        <div class="title">Question Difficile</div>
+        <div class="photoItem">
+            <img src="$ImageFolder" alt="" class="photo">
+        </div>
+        <div class="name">$nom</div>
         <div class="content">
             <div class="row">
-                <a class="card" href="QuestionFacile.php">Facile</a>
-                <a class="card" href="QuestionMoyen.php">Moyen</a>
+                <a class="card" href="mainMenu.php">Facile</a>
+                <a class="card" href="mainMenu.php">Moyen</a>
             </div>
             <div class="row">
-                <a class="card" href="QuestionDifficile.php">Difficile</a>
-                <a class="card" href="QuestionAléatoire.php">Aléatoire</a>
+                <a class="card" href="mainMenu.php">Difficile</a>
+                <a class="card" href="mainMenu.php">Alchimiste</a>
             </div>
         </div>
     HTML;
@@ -28,9 +43,9 @@
 
 .card {
   box-sizing: border-box;
-  width: 190px;
-  height: 254px;
-  margin: 80px; 
+  width: 350px;
+  height: 125px;
+  margin: 20px; 
   background: rgba(217, 217, 217, 0.58);
   border: 1px solid white;
   box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);

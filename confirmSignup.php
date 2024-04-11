@@ -9,9 +9,8 @@ try{
     $_SESSION['Email'] = sanitizeString($_POST['Email']);
     $joueur = new Joueurs($_POST["Email"],$_POST["Password"]);
     $_SESSION["currentPlayer"] = $joueur;
-    header('Location: mainMenu.php');
+    header('Location: boutique.php');
 }catch (Exception $e) {
     //redirige l'utilisateur vers la page de connexion avec message d'erreur
-    $_SESSION['SignUpError'] = "Une erreur se trouve dans les informations ;)";
-    header('Location: signup.php');
+    header('Location: signup.php?message=1');
 }

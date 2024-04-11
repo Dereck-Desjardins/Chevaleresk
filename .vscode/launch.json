@@ -10,7 +10,7 @@
             "request": "launch",
             "runtimeArgs": [
                 "-S",
-                "localhost:8080/Chevaleresk/mainMenu.php",
+                "localhost:8080/Chevaleresk/boutique.php",
                 "-t",
                 "."
             ],

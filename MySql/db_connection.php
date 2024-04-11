@@ -27,10 +27,10 @@ class DB
             $sql->execute();
             return "Le Joueur est inséré avec succès.";
         } catch (PDOException $e) {
-            echo 'Erreur insertion: ' . $e->getMessage();
-            exit();
+            throw new AliasException();
         }
     }
+    
     public static function UpdateJoueur($idJoueur,$alias, $nom, $prenom, $mp, $courriel)
     {
         try {
@@ -124,6 +124,31 @@ class DB
             exit();
         }
     }
+    public static function getReponse($idEnigme) {
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL trouverReponses(?)");
+            $sql->bindParam(1, $idEnigme);
+            $sql->execute();
+            return $sql->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            echo 'Erreur recherche: ' . $e->getMessage();
+            exit();
+        }
+    }
+    
+    public static function getEnigme($difficulte) {
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL trouverQuestion(?)");
+            $sql->bindParam(1, $difficulte);
+            $sql->execute();
+            return $sql->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            echo 'Erreur recherche: ' . $e->getMessage();
+            exit();
+        }
+    }
     public static function getItemById($id) {
         $mybd = self::Connection();
         $sql = $mybd->prepare("SELECT * FROM Items WHERE idItem = :id");
@@ -137,7 +162,19 @@ class DB
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
-    //Un Select Général pour l'instant 
+    public static function getAllRecettes() {
+        $mybd = self::Connection();
+        $sql = $mybd->prepare("SELECT * FROM Recettes");
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_OBJ);
+    }
+    public static function getRecetteById($id) {
+        $mybd = self::Connection();
+        $sql = $mybd->prepare("SELECT * FROM Recettes WHERE Potions_idItem = :id");
+        $sql->bindParam(':id', $id, PDO::PARAM_INT);
+        $sql->execute();
+        return $sql->fetch(PDO::FETCH_OBJ);
+    }
     public static function Select($columns, $table, $where = '')
     {
         try {
@@ -153,5 +190,20 @@ class DB
             exit();
         }
     }
+    public static function getSolde($idJ)
+    {
+        try {
+            $mybd = self::Connection();
+            $sql = "SELECT solde FROM Joueurs WHERE idjoueur = $idJ";
+            $stmt = $mybd->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            exit();
+        }
+    }
 
 }
+
+class AliasException extends Exception {}
+  
