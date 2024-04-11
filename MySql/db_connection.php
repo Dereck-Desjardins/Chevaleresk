@@ -124,6 +124,31 @@ class DB
             exit();
         }
     }
+    public static function getReponse($idEnigme) {
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL trouverReponses(?)");
+            $sql->bindParam(1, $idEnigme);
+            $sql->execute();
+            return $sql->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            echo 'Erreur recherche: ' . $e->getMessage();
+            exit();
+        }
+    }
+    
+    public static function getEnigme($difficulte) {
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL trouverQuestion(?)");
+            $sql->bindParam(1, $difficulte);
+            $sql->execute();
+            return $sql->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            echo 'Erreur recherche: ' . $e->getMessage();
+            exit();
+        }
+    }
     public static function getItemById($id) {
         $mybd = self::Connection();
         $sql = $mybd->prepare("SELECT * FROM Items WHERE idItem = :id");
