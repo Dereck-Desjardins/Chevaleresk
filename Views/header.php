@@ -1,11 +1,16 @@
 <?php
+    include_once "Models/joueurs.php";
     $styles = "css/header.css";
     $pageTitle = "Chevaleresk";
-    $log = 'Connexion';
+    $money;
     if(isset($_SESSION['currentPlayer'])){
-        $log = 'Profil';
+        $joueur = $_SESSION['currentPlayer'];
+        $log =  $joueur->Alias;
+        $money = $joueur->Solde;
     }
-
+    else{
+        $log = 'Connexion';
+    }
     $header = <<< HTML
     <nav class="navbar">
       <div class="navbar-container container">
@@ -22,7 +27,9 @@
               <li><a href="enigma.php">Enigma</a></li>
               <li><a href="panoramix.php">Panoramix</a></li>
               <li><a href="panier.php">Panier</a></li>
-              
+              <li><a>$money écus</a></li>
+
+
           </ul>
           <h1 class="logo">$pageTitle</h1>
       </div>

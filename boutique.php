@@ -1,14 +1,13 @@
 <?php
 include 'php/sessionManager.php';
 include 'php/formUtilities.php';
-include 'MySql/db_connection.php';
-
 $ImageFolder = "data/img/";
 
 $allItems = DB::getAllItems();
 $connecter = true;
+
 if (!isset($_SESSION['currentPlayer'])) {
-   $connecter = false;
+    $connecter = false;
 }
 $category = isset($_GET['category']) ? $_GET['category'] : null;
 
@@ -67,16 +66,43 @@ foreach ($allItems as $oneItem) {
                     <div class="typeItem">$typeItem</div>
                     <div class="typeItem">Quantité en inventaire : $quantite</div>
                 </div>
-                <div class="shopItemRight">
-                    <div class="prix">Prix unitaire: $prix Ecus</div>
-                    <input type="number"  id="$inputId" name="$inputId" min="1" max="$quantite" value="1" class="quantite" onkeydown="return false;">
-                    <input type="button" value="Ajouter au panier" class="bouton" onclick="addToBasket($id,$connecter)">
-                </div>
-            </div>
-          HTML;
+            HTML;
+            
+            if($typeItem == 'Element' ){
+                if(isset($_SESSION['currentPlayer'])){
+                    if($_SESSION['currentPlayer']->Niveau != 'herboriste'){
+                        $ItemHTML .= <<<HTML
+                            <div class="shopItemRight">
+                                <div class="prix">Prix unitaire: $prix Ecus</div>
+                                <input type="number"  id="$inputId" name="$inputId" min="1" max="$quantite" value="1" class="quantite" onkeydown="return false;">
+                                <input type="button" value="Ajouter au panier" class="bouton" onclick="addToBasket($id,$connecter)">
+                            </div> 
+                        HTML;
+                    }else{
+                        $ItemHTML .= <<<HTML
+                        <div class="shopItemRight">
+                            <div  class="txtNonAlchimiste">Vous n'avez pas le niveau nécessaire pour acheter cet élément.</div>
+                        </div> 
+                    HTML;
+                    }
+                }
+            }
+            else{
+                $ItemHTML .= <<<HTML
+                    <div class="shopItemRight">
+                        <div class="prix">Prix unitaire: $prix Ecus</div>
+                        <input type="number"  id="$inputId" name="$inputId" min="1" max="$quantite" value="1" class="quantite" onkeydown="return false;">
+                        <input type="button" value="Ajouter au panier" class="bouton" onclick="addToBasket($id,$connecter)">
+                    </div> 
+                HTML;
+            }
+            
+            $ItemHTML .= <<<HTML
 
-            $content .= $ItemHTML;
-        }
+</div>
+HTML;
+$content .= $ItemHTML;
+}
     }
 }
 
@@ -88,13 +114,13 @@ include "views/master.php";
     $("[type='number']").keypress(function (evt) {
         evt.preventDefault();
     });
-    function addToBasket(itemId,connecter) {    
-        if(connecter)   {
-           var quantityInput = document.getElementById("quantite_" + itemId);
+    function addToBasket(itemId, connecter) {
+        if (connecter) {
+            var quantityInput = document.getElementById("quantite_" + itemId);
             var quantity = quantityInput.value;
-            window.location.href = "addToBasket.php?itemId=" + itemId + "&quantity=" + quantity;  
-        } else{
-            window.location.href =' login.php?message=3';
+            window.location.href = "addToBasket.php?itemId=" + itemId + "&quantity=" + quantity;
+        } else {
+            window.location.href = ' login.php?message=3';
         }
     }
 </script>
