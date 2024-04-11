@@ -52,7 +52,7 @@
 }
 .recetteNom{
     width: 100%;
-    font-size: 3em;
+    font-size: 2em;
     text-align: center;
     margin:auto;
 }
@@ -85,6 +85,10 @@
     height: 70px;
     width: auto;
     
+}
+.imgResultat{
+    height: 150px;
+    width: auto;
 }
 .quantiteIngredient{
     width: 25%;
