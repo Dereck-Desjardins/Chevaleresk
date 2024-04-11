@@ -22,13 +22,12 @@
           </div>
           <ul class="menu-items">
               <li><a href="login.php">$log</a></li>
-              <li><a>$money écus</a></li>
               <li><a href="boutique.php">Boutique</a></li>
               <li><a href="inventaire.php">Inventaire</a></li>
               <li><a href="enigma.php">Enigma</a></li>
               <li><a href="panoramix.php">Panoramix</a></li>
               <li><a href="panier.php">Panier</a></li>
-              
+              <li><a>$money écus</a></li>
           </ul>
           <h1 class="logo">$pageTitle</h1>
       </div>
