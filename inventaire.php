@@ -45,7 +45,9 @@ else{
                 
             </div>
             <div class="inventaireContainer">
+
         HTML;
+        
         foreach($allItemsInv as $oneItemInv){
         $id = $oneItemInv["dItem"];
         $oneItem = DB::getItemById($id);
