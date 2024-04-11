@@ -3,7 +3,6 @@
 // http://php.net/session.gc-maxlifetime
 //
 date_default_timezone_set('US/Eastern');
-
 const defaultTimeout = 20 * 60;
 include_once "Models/joueurs.php";
 session_start();

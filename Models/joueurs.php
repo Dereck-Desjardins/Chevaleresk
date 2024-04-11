@@ -57,6 +57,9 @@ class Joueurs
     {
         return $this->Solde;
     }
+    public function setSolde($newSolde){
+        return $this->Solde = $newSolde;
+    }
     public function getNiveau()
     {
         return $this->Niveau;

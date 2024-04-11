@@ -28,8 +28,6 @@
               <li><a href="panoramix.php">Panoramix</a></li>
               <li><a href="panier.php">Panier</a></li>
               <li><a>$money écus</a></li>
-
-
           </ul>
           <h1 class="logo">$pageTitle</h1>
       </div>
