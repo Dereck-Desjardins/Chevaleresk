@@ -35,6 +35,7 @@ foreach ($allItems as $oneItem) {
     $prix = $oneItem->prix;
     $photo = $oneItem->photo;
 
+<<<<<<< Updated upstream
     if ($category === null || $typeItem === $category) {
         switch ($typeItem) {
             case "R":
@@ -50,6 +51,25 @@ foreach ($allItems as $oneItem) {
                 $typeItem = "Element";
                 break;
         }
+=======
+    if($quantite > 0){
+      $ItemHTML = <<<HTML
+        <div class="itemLayout">
+            <div class="shopItemLeft">
+                <a href="detailItem.php">
+                    <img src="$ImageFolder$photo" alt="" class="photoItemShop">
+                </a>    
+            </div>
+            <div class="shopItemMiddle">
+                <div class="nomItem">$nom</div>
+                <div class="typeItem">$typeItem</div>
+            </div>
+            <div class="shopItemRight">
+                <div class="prix">Prix unitaire: $prix </div>
+                <input type="number" id="quantite" name="quantite" min="1" value="1" class="quantite">
+                <input type="button" value="Ajouter au panier" class="bouton" onclick="">
+            </div>
+>>>>>>> Stashed changes
 
         if ($quantite > 0) {
             $inputId = "quantite_$id";
