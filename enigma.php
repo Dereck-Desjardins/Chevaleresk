@@ -1,4 +1,5 @@
 <?php
+include 'php/sessionManager.php';
     $content = <<<HTML
         <div class="content">
             <div class="row">

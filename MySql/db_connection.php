@@ -173,7 +173,7 @@ class DB
         $sql = $mybd->prepare("SELECT * FROM Recettes WHERE Potions_idItem = :id");
         $sql->bindParam(':id', $id, PDO::PARAM_INT);
         $sql->execute();
-        return $sql->fetch(PDO::FETCH_OBJ);
+        return $sql->fetchAll(PDO::FETCH_OBJ);
     }
     public static function Select($columns, $table, $where = '')
     {
@@ -197,6 +197,18 @@ class DB
             $sql = "SELECT solde FROM Joueurs WHERE idjoueur = $idJ";
             $stmt = $mybd->query($sql);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            exit();
+        }
+    }
+    public static function getAllPotions()
+    {
+        try {
+            $mybd = self::Connection();
+            $sql = "SELECT * FROM Items WHERE typeItem = 'P'";
+            $stmt = $mybd->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
             echo 'Erreur : ' . $e->getMessage();
             exit();
