@@ -13,7 +13,7 @@
     }
     $header = <<< HTML
     <nav class="navbar">
-      <div class="navbar-container container">
+      <div class="navbar-container ">
           <input type="checkbox" name="" id="">
           <div class="hamburger-lines">
               <span class="line line1"></span>
