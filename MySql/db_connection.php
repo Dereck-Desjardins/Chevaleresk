@@ -83,6 +83,34 @@ class DB
             exit();
         }
     }
+    public static function NiveauAlchi($idJoueur,$newNiv,$nbr){
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL niveauAlchimiste(?, ?,?)");
+            $sql->bindParam(1, $idJoueur);
+            $sql->bindParam(2, $newNiv);
+            $sql->bindParam(3, $nbr);
+            $sql->execute();
+            return "Bravo";
+        } catch (PDOException $e) {
+            echo 'Erreur insertion: ' . $e->getMessage();
+            exit();
+        }
+    }
+    public static function QuestionRéussie($idJoueur,$money,$idQuestion){
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL questionReussie(?, ?, ?)");
+            $sql->bindParam(1, $idJoueur);
+            $sql->bindParam(2, $money);
+            $sql->bindParam(3, $idQuestion);
+            $sql->execute();
+            return "Bravo";
+        } catch (PDOException $e) {
+            echo 'Erreur insertion: ' . $e->getMessage();
+            exit();
+        }
+    }
     public static function GetInventaire($idJoueur)
     {
         try {

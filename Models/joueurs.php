@@ -15,6 +15,7 @@ class Joueurs
     public $Courriel;
 
     public $Panier;
+    public $Experience;
 
 
     public function __construct($email, $mp)
@@ -33,6 +34,7 @@ class Joueurs
             $this->EstAdmin = $result[0]['estAdmin'];
             $this->Solde = $result[0]['solde'];
             $this->MotDePasse = $result[0]['motdepasse'];
+            $this->Experience = $result[0]['exp'];
         } else {
             throw new Exception('');
         }
@@ -59,6 +61,17 @@ class Joueurs
     }
     public function setSolde($newSolde){
         return $this->Solde = $newSolde;
+    }
+    public function setExp(){
+        $this->Experience =$this->Experience + 1;
+        if( $this->Experience == 3){
+            DB::NiveauAlchi($this->Id,'debutant',3);
+        }elseif ( $this->Experience == 6){
+            DB::NiveauAlchi($this->Id,'intermediaire',6);
+        }
+        elseif ( $this->Experience == 9){
+            DB::NiveauAlchi($this->Id,'expert',9);
+        }
     }
     public function getNiveau()
     {
