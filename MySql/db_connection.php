@@ -165,13 +165,15 @@ class DB
         }
     }
     
-    public static function getEnigme($difficulte) {
+
+    public static function getEnigme($difficulte,$type) {
         try {
             $mybd = self::Connection();
-            $sql = $mybd->prepare("CALL trouverQuestion(?)");
+            $sql = $mybd->prepare("CALL trouverQuestion(?,?)");
             $sql->bindParam(1, $difficulte);
+            $sql->bindParam(2, $type);
             $sql->execute();
-            return $sql->fetchAll(PDO::FETCH_OBJ);
+            return $sql->fetch(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
             echo 'Erreur recherche: ' . $e->getMessage();
             exit();
