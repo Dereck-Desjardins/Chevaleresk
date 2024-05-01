@@ -71,7 +71,7 @@ body {
 .navbar-container {
   display: flex;
   justify-content: space-between;
-  height: 64px;
+  height: 1004px;
   align-items: center;
 }
 

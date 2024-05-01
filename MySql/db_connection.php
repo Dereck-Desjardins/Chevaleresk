@@ -246,6 +246,18 @@ public static function getAllRecettes() {
             exit();
         }
     }
+    public static function getAllPotions()
+    {
+        try {
+            $mybd = self::Connection();
+            $sql = "SELECT * FROM Items WHERE typeItem = 'P'";
+            $stmt = $mybd->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            exit();
+        }
+    }
 
     public static function getAllPotions()
     {

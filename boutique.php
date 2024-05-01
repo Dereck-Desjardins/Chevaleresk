@@ -183,7 +183,6 @@ include "views/master.php";
         var item = items[l];
         var itemType = item.getElementsByClassName("typeItem")[0].textContent;
 
-
         // Si "Aucun" est sélectionné, afficher tous les éléments
         if (aucunCheckbox !== null && aucunCheckbox.checked) {
             item.style.display = "";
