@@ -5,6 +5,7 @@
 date_default_timezone_set('US/Eastern');
 
 const defaultTimeout = 20 * 60;
+include_once "Models/joueurs.php";
 session_start();
 $_SESSION['timeout'] = defaultTimeout;
 function set_Session_Timeout($timeout, $returnPage)

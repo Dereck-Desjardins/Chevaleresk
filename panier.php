@@ -78,12 +78,16 @@ if (!isset($_SESSION['currentPlayer'])) {
     }
 }
     $actionBarHtml = <<<HTML
-    <div class="total">Total: $totalPrice</div>
+    <div class="sectionDroite">
 
-    <button class="bouton" onclick="handleBuyCart()">Payer</button>
-
-    <button class="bouton" onclick="handleEmptyCart()">Vider le panier</button>
-HTML;
+        <div class="total">Total: $totalPrice</div>
+        
+        <button class="bouton" onclick="handleBuyCart()">Payer</button>
+        
+        <button class="bouton" onclick="handleEmptyCart()">Vider le panier</button>
+    
+    </div>
+    HTML;
     $content .= $actionBarHtml;
     $content .= '</div></div>';
 }

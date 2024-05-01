@@ -1,7 +1,6 @@
 <?php
     include 'php/sessionManager.php';
     include 'php/formUtilities.php';
-    include 'MySql/db_connection.php';
     // fonction qui va chercher l<item via id
     $idItem = $_GET['id'];
     $lastPage = $_GET['lastPage'];

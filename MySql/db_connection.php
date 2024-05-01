@@ -83,6 +83,21 @@ class DB
             exit();
         }
     }
+    
+    public static function QuestionRéussie($idJoueur,$money,$idQuestion){
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL questionReussie(?, ?, ?)");
+            $sql->bindParam(1, $idJoueur);
+            $sql->bindParam(2, $money);
+            $sql->bindParam(3, $idQuestion);
+            $sql->execute();
+            return "Bravo";
+        } catch (PDOException $e) {
+            echo 'Erreur insertion: ' . $e->getMessage();
+            exit();
+        }
+    }
     public static function GetInventaire($idJoueur)
     {
         try {
@@ -124,6 +139,59 @@ class DB
             exit();
         }
     }
+    public static function getReponse($idEnigme) {
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL trouverReponses(?)");
+            $sql->bindParam(1, $idEnigme);
+            $sql->execute();
+            return $sql->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            echo 'Erreur recherche: ' . $e->getMessage();
+            exit();
+        }
+    }
+    
+    public static function getEnigme($difficulte,$type) {
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL trouverQuestion(?,?)");
+            $sql->bindParam(1, $difficulte);
+            $sql->bindParam(2, $type);
+            $sql->execute();
+            return $sql->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            echo 'Erreur recherche: ' . $e->getMessage();
+            exit();
+        }
+    }
+    public static function NiveauAlchi($idJoueur,$nbr){
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL niveauAlchimiste(?, ?)");
+            $sql->bindParam(1, $idJoueur);
+            $sql->bindParam(2, $nbr);
+            $sql->execute();
+            return "Bravo";
+        } catch (PDOException $e) {
+            echo 'Erreur insertion: ' . $e->getMessage();
+            exit();
+        }
+    }
+    
+    public static function ChangeAlchi($idJoueur,$newNiveau){
+        try {
+            $mybd = self::Connection();
+            $sql = $mybd->prepare("CALL ChangeAlchi(?, ?)");
+            $sql->bindParam(1, $idJoueur);
+            $sql->bindParam(2, $newNiveau);
+            $sql->execute();
+            return "Bravo";
+        } catch (PDOException $e) {
+            echo 'Erreur insertion: ' . $e->getMessage();
+            exit();
+        }
+    }
     public static function getItemById($id) {
         $mybd = self::Connection();
         $sql = $mybd->prepare("SELECT * FROM Items WHERE idItem = :id");
@@ -137,7 +205,20 @@ class DB
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
-    //Un Select Général pour l'instant 
+    public static function getRecetteById($id) {
+        $mybd = self::Connection();
+        $sql = $mybd->prepare("SELECT * FROM Recettes WHERE Potions_idItem = :id");
+        $sql->bindParam(':id', $id, PDO::PARAM_INT);
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_OBJ);
+    }
+public static function getAllRecettes() {
+        $mybd = self::Connection();
+        $sql = $mybd->prepare("SELECT * FROM Recettes");
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_OBJ);
+    }
+    //!!!!!!!!! À NE SURTOUT PAS UTILISER!!!!!!!!!!!!!!!!!!!
     public static function Select($columns, $table, $where = '')
     {
         try {
@@ -147,7 +228,7 @@ class DB
                 $sql .= " WHERE $where";
             }
             $stmt = $mybd->query($sql);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo 'Erreur : ' . $e->getMessage();
             exit();
@@ -162,6 +243,68 @@ class DB
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo 'Erreur : ' . $e->getMessage();
+            exit();
+        }
+    }
+
+    public static function getAllPotions()
+    {
+        try {
+            $mybd = self::Connection();
+            $sql = "SELECT * FROM Items WHERE typeItem = 'P'";
+            $stmt = $mybd->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            exit();
+        }
+    }
+public static function Concocter($idPotion, $idJoueur)
+    {
+        try
+        {
+            $success = true;
+
+            $recettes = DB::getRecetteById($idPotion);
+            foreach ($recettes as $recette) {
+                $quantity = $recette->Quantite;
+                $element = $recette->Elements_idItem;
+                if($success == 1){
+                    $mybd = self::Connection();
+                    $sql = $mybd->prepare("SELECT checkQuantity($idJoueur, $element, $quantity)");
+                    $sql->execute(); 
+                    $retour = $sql->fetch();
+                    $success = $retour[0];
+
+                }
+            }
+            if ($success == 1) {
+                foreach($recettes as $recette){
+                    $quantity = $recette->Quantite;
+                    $element = $recette->Elements_idItem;
+                    $mybd = self::Connection();
+                    $sql = $mybd->prepare("CALL updateElement(?, ?, ?)");
+                    $sql->bindParam(1, $idJoueur);
+                    $sql->bindParam(2, $element);
+                    $sql->bindParam(3, $quantity);
+                    $sql->execute(); 
+                }
+
+                $qttPotion = 1;
+                $mybd = self::Connection();
+                $sql = $mybd->prepare("CALL concocter(?, ?, ?)");
+                $sql->bindParam(1, $idPotion);
+                $sql->bindParam(2, $idJoueur);
+                $sql->bindParam(3, $qttPotion);
+                $sql->execute();
+                $joueur = ($_SESSION['currentPlayer']);
+                $joueur->setExp();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo 'Erreur modification: ' . $e->getMessage();
             exit();
         }
     }

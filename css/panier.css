@@ -1,0 +1,106 @@
+.itemLayout{
+    display: flex;
+    height: auto;
+    border-color:black;
+    border-style: solid;
+    padding: 5px 10px 5px 10px;
+}
+.txtNonAlchimiste{
+    color: red;
+};
+.shopItemLeft{
+    flex: 1;
+    margin: auto;
+    text-align: center;
+}
+.shopItemMiddle{
+    flex: 3;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.shopItemRight{
+    flex: 1;
+    align-content:center;
+    text-align: center;
+}
+.photoItemShop{
+    height: 200px;
+    width: auto;
+}
+.nomItem{
+    font-size: 1.5em;
+}
+.typeItem{
+    align-content: bottom;
+    font-size: 1.2em;
+}
+
+.quantite{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+    width: 90px;
+    padding-left: 10px;
+}
+.bouton {
+    background-color: #4A525A;
+    color: white;
+    border: none;
+}
+.itemContainer{
+    width:80%;
+    margin: auto;
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    transition: background-color 0.3s ease; 
+}
+.bouton:hover {
+    background-color: #41484F; 
+}
+a {
+  text-decoration: none;
+}
+.category-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.category-nav ul {
+  display: flex;
+  list-style: none;
+}
+
+.category-nav ul li {
+  margin: 0 1rem;
+}
+
+.category-nav ul li a {
+  padding: 0.5rem 1rem;
+  border: 1px solid #2c3e50;
+  color: #000;
+  border-radius: 5px;
+  text-decoration: none;
+}
+.category-nav ul li a:hover {
+    color: #117964;
+    transition: color 0.3s ease-in-out;
+  }
+
+.panierVide{
+    border-color: #000;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 3em;
+    padding: 20px;
+}
+
+.sectionDroite{
+    float:inline-end;
+    width: 18%;
+    padding: 20px;
+}
