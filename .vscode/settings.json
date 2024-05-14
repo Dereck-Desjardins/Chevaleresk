@@ -1,8 +1,6 @@
 {
-    "vscode-pets.petColor": "brown",
-    "vscode-pets.petSize": "small",
-    "vscode-pets.petType": "clippy",
-    "vscode-pets.position": "explorer",
-    "vscode-pets.theme": "none",
-    "vscode-pets.throwBallWithMouse": true
+    "php.stubs": [
+        "*",
+        "com"
+    ]
 }

@@ -12,19 +12,19 @@ if (!isset($_SESSION['currentPlayer'])) {
 } else {
     $ImageFolder = "data/img/";
 
-    $content = '<div class="content"><div class="itemContainer">';
-    $totalPrice = 0;
-    if(count($_SESSION["currentPlayer"]->Panier->items) == 0){
-        $content.= <<<HTML
+            $content = '<div class="content"><div class="itemContainer">';
+            $totalPrice = 0;
+            if(count($_SESSION["currentPlayer"]->Panier->items) == 0){
+                $content.= <<<HTML
             <div class="panierVide">Votre panier est actuellement vide</div>
-        HTML;
-    }
-    else{
-    
-    foreach ($_SESSION["currentPlayer"]->Panier->items as $itemId => $quantity) {
-        $oneItem = DB::getItemById($itemId);
-       
-
+            HTML;
+        }
+        else{
+            
+            foreach ($_SESSION["currentPlayer"]->Panier->items as $itemId => $quantity) {
+                $oneItem = DB::getItemById($itemId);
+                
+                
         if ($oneItem) {
             $id = $oneItem->idItem;
             $nom = $oneItem->nom;
@@ -54,7 +54,17 @@ if (!isset($_SESSION['currentPlayer'])) {
             $totalPrice += $subtotal;
 
             $inputId = "quantite_$id";
+        $actionBarHtml = <<<HTML
+            <div class="sectionDroite">
 
+                <div class="total">Total: $totalPrice</div>
+                
+                <button class="bouton" onclick="handleBuyCart()">Payer</button>
+                
+                <button class="bouton" onclick="handleEmptyCart()">Vider le panier</button>
+            
+            </div>
+            HTML;
             $ItemHTML = <<<HTML
         <div class="itemLayout">
             <a href="detailItem.php?id=$id&lastPage=3" class="shopItemLeft">
@@ -66,25 +76,19 @@ if (!isset($_SESSION['currentPlayer'])) {
             </div>
             <div class="shopItemRight">
                 <div class="prix">Prix unitaire: $prix</div>
-                <div class="quantite">Quantité: <input type="number" id="$inputId" name="$inputId" min="1"  max="$quantite" value="$quantity" class="quantite" onclick="handleQuantityChange(this.value ,$id)" onkeydown="return false;"></div>
+                <div class="quantite">Quantité:</div>
+                <input type="number" id="$inputId" name="$inputId" min="1"  max="$quantite" value="$quantity" class="quantite" onclick="handleQuantityChange(this.value ,$id)" onkeydown="return false;">
                 <div class="subtotal">Sous-total: $subtotal</div>
                 <input type="button" value="Enlever" class="bouton" onclick="Remove($id)">
             </div>
         </div>
         HTML;
-
+            
+            $content .= $actionBarHtml;
             $content .= $ItemHTML;
         }
     }
 }
-    $actionBarHtml = <<<HTML
-    <div class="total">Total: $totalPrice</div>
-
-    <button class="bouton" onclick="handleBuyCart()">Payer</button>
-
-    <button class="bouton" onclick="handleEmptyCart()">Vider le panier</button>
-HTML;
-    $content .= $actionBarHtml;
     $content .= '</div></div>';
 }
 }

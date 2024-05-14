@@ -2,7 +2,7 @@
 
 class Panier
 {
-    public $items; 
+    public $items = []; 
 
     public function __construct()
     {
