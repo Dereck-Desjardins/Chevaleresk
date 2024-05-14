@@ -2,7 +2,7 @@
     include_once "Models/joueurs.php";
     include 'php/sessionManager.php';
     include 'php/formUtilities.php';
-    const NIVEAU = 'debutant';
+    const NIVEAU = 'herboriste';
     const NONADMIN = 0 ;
 try{
     DB::InsertJoueur($_POST['Alias'],$_POST['Name'],$_POST['FirstName'],NIVEAU,NONADMIN,$_POST['Password'],$_POST['Email']);

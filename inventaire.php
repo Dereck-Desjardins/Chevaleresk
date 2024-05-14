@@ -69,7 +69,7 @@ else{
                 </a>
                 <div class="quantiteInventaire">X$quantite</div>
                 <input type="button" value="Vendre" class="btnVendre" onclick="sell($id)">
-                <input onkeydown="return false;" type="number" id="$inputId" name="$inputId" min="1" value="1" class="qttVendre">
+                <input onkeydown="return false;" type="number" id="$inputId" name="$inputId" min="1" max="$quantite" value="1" class="qttVendre">
             </div>
         HTML;
 
