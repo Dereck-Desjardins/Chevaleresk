@@ -8,9 +8,62 @@ drop procedure if exists ajouterJoueurs;
 drop procedure if exists ajouterItemInv;
 drop procedure if exists rechercherItem;
 drop procedure if exists avoirInventaireJ;
+drop procedure if exists ajouterQuestion;
+drop procedure if exists ajouterReponse;
+drop procedure if exists trouverQuestion;
+drop procedure if exists trouverReponses;
 drop procedure if exists modiferProfil;
+
 drop trigger if exists CTRLInsertItems;
 
+
+
+
+delimiter |
+create procedure trouverQuestion(
+in pDifficulte CHAR(1)
+)
+begin
+SELECT  * FROM Enigmes WHERE Difficulte = pDifficulte AND estPigee = 'n';
+end |
+delimiter |
+
+delimiter |
+create procedure trouverReponses(
+in pidEnigme INT(11)
+)
+begin
+SELECT  * FROM Reponses WHERE idEnigme = pidEnigme;
+end |
+delimiter |
+delimiter |
+create procedure ajouterReponse(
+in pLaReponse varchar(45),
+in pEstBonne varchar(45),
+in pidEnigme INT(11)
+)
+begin
+start transaction;
+INSERT INTO Reponses (Lareponse,EstBonne,idEnigme)
+VALUES (pLaReponse,pEstBonne,pidEnigme);
+commit;
+end |
+delimiter |
+
+delimiter |
+create procedure ajouterQuestion(
+in pEnonce varchar(45),
+in pType CHAR(1),
+in pDifficulte CHAR(1),
+in pidItem INT(11)
+)
+begin
+start transaction;
+INSERT INTO Enigmes (Enonce,TypeEnigme,Difficulte,estPigee,idItem)
+VALUES (pEnonce,pType,pDifficulte,'n',pidItem);
+commit;
+end |
+delimiter |
 
 delimiter |
 create procedure ajouterArme(
