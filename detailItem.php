@@ -24,6 +24,7 @@
         $efficacite = $Item[0]->efficacite;
         $genre = $Item[0]->genre;
     }
+<<<<<<< Updated upstream
     elseif($typeItem == "P"){
         $duree = $Item[0]->duree." Minutes";
         $effet = $Item[0]->effet;
@@ -34,6 +35,12 @@
         elseif($typePotion == "D"){
             $typePotion = "Defense";
         }
+=======
+    if($typeItem == "P"){
+        $duree = 
+        $effet = 
+        $typePotion = 
+>>>>>>> Stashed changes
     }
     elseif($typeItem == "E"){
         $rarete = $Item[0]->rarete;

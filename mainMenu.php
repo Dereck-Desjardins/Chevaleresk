@@ -5,6 +5,7 @@ require 'php/sessionManager.php';
 $content = <<<HTML
         <!-- <div class="slider">
             <div class="slide">
+<<<<<<< Updated upstream
                 <img class="img" src="data\img/Image/darkvader.png" alt="Slide 1">
             </div>
             <div class="slide">
@@ -52,6 +53,12 @@ $content = <<<HTML
                 </div>
             </div>
             </div>
+=======
+                <img src="data\img/Image/darkvader.png" alt="Slide 1">
+            </div>
+            <div class="slide">
+                <img src="data\img/Image/wood.jpg" alt="Slide 2">
+>>>>>>> Stashed changes
             </div>
         </div>
         

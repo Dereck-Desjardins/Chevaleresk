@@ -1,6 +1,7 @@
 <?php
 require 'php/sessionManager.php';
 
+<<<<<<< Updated upstream
 if(isset($_GET['message']) && $_GET['message'] == 1){
     $message = "Veuillez vous connecter pour acceder a votre panier!";
 }
@@ -21,6 +22,11 @@ if (!isset($_SESSION['currentPlayer'])) {
     $Email = isset($_SESSION['Email']) ? $_SESSION['Email'] : '';
     $LoginError = isset($_SESSION['LoginError']) ? $_SESSION['LoginError'] : '';
 
+=======
+if(!isset($_SESSION['currentPlayer'])){
+    $Email = isset ($_SESSION['Email']) ? $_SESSION['Email'] : '';
+    $LoginError = isset($_SESSION['LoginError'])? $_SESSION['LoginError'] : '';
+>>>>>>> Stashed changes
 
     $content = <<<HTML
         <div class="loginContent">
